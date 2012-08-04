@@ -1,0 +1,28 @@
+#ifndef UC_CHECKBOX_H
+#define UC_CHECKBOX_H
+
+#include "UserControl.h"
+#include "gui.h"
+
+class UC_CheckBox : public UserControl
+{
+	public:
+		UC_CheckBox(string, int, int);
+		virtual ~UC_CheckBox();
+
+		void Draw(sf::RenderTarget *);
+		void OnHover(int, int, GUI*);
+		void OnUnhover(int, int, GUI*);
+		void OnClick(int, int, GUI*);
+		void OnUnclick(int, int, GUI*);
+
+		bool Checked;
+	protected:
+	private:
+		string _caption;
+		sf::Image _img;
+		sf::Sprite _sprite;
+		sf::String _label;
+};
+
+#endif // UC_CHECKBOX_H
