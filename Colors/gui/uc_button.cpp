@@ -113,22 +113,22 @@ void UC_Button::Draw(sf::RenderTarget *window)
 
 void UC_Button::OnHover(int, int, GUI*)
 {
-	_buttonSprite.SetSubRect(sf::IntRect(0, _buttonImg.GetHeight() / 3, _buttonImg.GetWidth(), (_buttonImg.GetHeight() / 3) * 2));
+	_buttonSprite.SetSubRect(sf::IntRect(1, _buttonImg.GetHeight() / 3, _buttonImg.GetWidth(), (_buttonImg.GetHeight() / 3) * 2));
 }
 
 void UC_Button::OnUnhover(int, int, GUI*)
 {
-	_buttonSprite.SetSubRect(sf::IntRect(0, 0, _buttonImg.GetWidth(), _buttonImg.GetHeight() / 3));
+	_buttonSprite.SetSubRect(sf::IntRect(1, 1, _buttonImg.GetWidth(), _buttonImg.GetHeight() / 3));
 }
 
 void UC_Button::OnClick(int, int, GUI*)
 {
-	_buttonSprite.SetSubRect(sf::IntRect(0, (_buttonImg.GetHeight() / 3) * 2, _buttonImg.GetWidth(), (_buttonImg.GetHeight() / 3) * 3));
+	_buttonSprite.SetSubRect(sf::IntRect(1, (_buttonImg.GetHeight() / 3) * 2, _buttonImg.GetWidth(), (_buttonImg.GetHeight() / 3) * 3));
 }
 
 void UC_Button::OnUnclick(int, int, GUI* gui)
 {
-	_buttonSprite.SetSubRect(sf::IntRect(0, _buttonImg.GetHeight() / 3, _buttonImg.GetWidth(), (_buttonImg.GetHeight() / 3) * 2));
+	_buttonSprite.SetSubRect(sf::IntRect(1, _buttonImg.GetHeight() / 3, _buttonImg.GetWidth(), (_buttonImg.GetHeight() / 3) * 2));
 	if(callback != null)
 	{
 		if(callbackParam != null)
