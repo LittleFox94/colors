@@ -62,6 +62,18 @@ void MainMenu::BuildNewGameWindow()
     numPlayers->AddItem("4");
     _newGameWindow->Gui()->AddItem(numPlayers);
 
+    UC_Label *numColorsLabel = new UC_Label("Farbenanzahl:", sf::Color(0, 0, 0), 12, 5, 102);
+    _newGameWindow->Gui()->AddItem(numColorsLabel);
+
+    UC_ComboBox *numColors = new UC_ComboBox(140, 100, 120);
+    numColors->AddItem("4");
+    numColors->AddItem("5");
+    numColors->AddItem("6");
+    numColors->AddItem("7");
+    numColors->AddItem("8");
+    numColors->AddItem("9");
+    numColors->AddItem("10");
+    _newGameWindow->Gui()->AddItem(numColors);
 
     _mainMenu->AddItem(_newGameWindow);
 }

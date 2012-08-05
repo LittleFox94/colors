@@ -32,9 +32,14 @@ void GUI::DrawItems(sf::RenderTarget *window)
 
 	while(current != null)
 	{
-		current->control->Draw(window);
+	    if(current != FocusedItem)
+            current->control->Draw(window);
+
 		current = current->next;
 	}
+
+	if(FocusedItem != null)
+        FocusedItem->control->Draw(window);
 }
 
 void GUI::AddItem(UserControl *control)
