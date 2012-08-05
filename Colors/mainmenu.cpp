@@ -50,32 +50,38 @@ void MainMenu::BuildNewGameWindow()
     _newGameWindow->Height = 400;
     _newGameWindow->Title = "Neues Spiel";
 
-    UC_Label *title = new UC_Label("Neues Spiel", sf::Color(0, 0, 0), 24, 5, 24);
+    UC_Label *title = new UC_Label("Neues Spiel", sf::Color(0, 0, 0), 24, 5, 5);
     _newGameWindow->Gui()->AddItem(title);
 
-    UC_Label *numPlayersLabel = new UC_Label("Spieleranzahl:", sf::Color(0, 0, 0), 12, 5, 72);
+    UC_Label *numPlayersLabel = new UC_Label("Spieleranzahl:", sf::Color(0, 0, 0), 12, 5, 52);
     _newGameWindow->Gui()->AddItem(numPlayersLabel);
 
-    UC_ComboBox *numPlayers = new UC_ComboBox(140, 70, 120);
+    UC_ComboBox *numPlayers = new UC_ComboBox(140, 50, 120);
     numPlayers->AddItem("2");
     numPlayers->AddItem("3");
     numPlayers->AddItem("4");
+    numPlayers->SetCurrentIndex(0);
     _newGameWindow->Gui()->AddItem(numPlayers);
 
-    UC_Label *numColorsLabel = new UC_Label("Farbenanzahl:", sf::Color(0, 0, 0), 12, 5, 102);
+    UC_Label *numColorsLabel = new UC_Label("Farbenanzahl:", sf::Color(0, 0, 0), 12, 5, 82);
     _newGameWindow->Gui()->AddItem(numColorsLabel);
 
-    UC_ComboBox *numColors = new UC_ComboBox(140, 100, 120);
-    numColors->AddItem("4");
+    UC_ComboBox *numColors = new UC_ComboBox(140, 80, 120);
+    numColors->AddItem("4 (Leicht)");
     numColors->AddItem("5");
     numColors->AddItem("6");
     numColors->AddItem("7");
     numColors->AddItem("8");
     numColors->AddItem("9");
-    numColors->AddItem("10");
+    numColors->AddItem("10 (Sehr Schwer)");
+    numColors->SetCurrentIndex(0);
     _newGameWindow->Gui()->AddItem(numColors);
 
-    _mainMenu->AddItem(_newGameWindow);
+    UC_Button *createGameButton = new UC_Button("res/img/gui/button.png", "Spiel starten", 500 - 125, 380 - 30, NULL);
+    _newGameWindow->Gui()->AddItem(createGameButton);
+
+    UC_Button *cancelButton = new UC_Button("res/img/gui/button.png", "Abbrechen", 500 - 250, 380 - 30, NULL);
+    _newGameWindow->Gui()->AddItem(cancelButton)
 }
 
 bool MainMenu::Running()

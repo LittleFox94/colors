@@ -23,7 +23,7 @@ void UC_ProgressBar::Draw(sf::RenderTarget *window)
     if(Parent != null)
     {
         posX += Parent->XPos;
-        posY += Parent->YPos;
+        posY += Parent->YPos + Parent->Offset;
     }
 
 	Value = Value <= Max ? Value : Max;

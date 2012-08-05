@@ -33,7 +33,7 @@ void UC_Label::Draw(sf::RenderTarget *window)
     if(Parent != null)
     {
         posX += Parent->XPos;
-        posY += Parent->YPos;
+        posY += Parent->YPos + Parent->Offset;
     }
 
 	_s.SetPosition(posX, posY);

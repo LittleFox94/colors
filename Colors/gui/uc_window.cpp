@@ -49,7 +49,7 @@ void UC_Window::Draw(sf::RenderTarget *SF_Window)
 
 void UC_Window::OnHover(int posX, int posY, GUI *gui)
 {
-	_gui->HoverAtPos(posX - XPos, posY - YPos);
+	_gui->HoverAtPos(posX - XPos, posY - YPos - Offset);
 }
 
 bool UC_Window::IsMovable()
@@ -59,12 +59,12 @@ bool UC_Window::IsMovable()
 
 void UC_Window::OnClick(int posX, int posY, GUI *gui)
 {
-	_gui->ClickAtPos(posX - XPos, posY - YPos);
+	_gui->ClickAtPos(posX - XPos, posY - YPos - Offset);
 }
 
 void UC_Window::OnUnclick(int posX, int posY, GUI *gui)
 {
-	_gui->UnclickAtPos(posX - XPos, posY - YPos);
+	_gui->UnclickAtPos(posX - XPos, posY - YPos - Offset);
 }
 
 void UC_Window::OnKeyPressed(char c)

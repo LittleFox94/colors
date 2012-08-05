@@ -44,7 +44,7 @@ UC_Button::UC_Button(string imgFileName, string caption, int posX, int posY, voi
 
 	callback = cb;
 
-    _label = new UC_Label(caption, sf::Color(255, 255, 255), Height / 3, XPos + 10, YPos + (Height / 4));
+    _label = new UC_Label(caption, sf::Color(255, 255, 255), Height / 2, XPos + 10, YPos + (Height / 6));
 }
 
 UC_Button::UC_Button(string imgFileName, int posX, int posY, void *cb, void *param)
@@ -80,7 +80,7 @@ UC_Button::UC_Button(string imgFileName, string caption, int posX, int posY, voi
 	callback = cb;
 	callbackParam = param;
 
-	_label = new UC_Label(caption, sf::Color(255, 255, 255), Height / 3, XPos + 10, YPos + (Height / 4));
+	_label = new UC_Label(caption, sf::Color(255, 255, 255), Height / 2, XPos + 10, YPos + (Height / 6));
 }
 
 UC_Button::~UC_Button()
@@ -101,7 +101,7 @@ void UC_Button::Draw(sf::RenderTarget *window)
     if(Parent != null)
     {
         posX += Parent->XPos;
-        posY += Parent->YPos;
+        posY += Parent->YPos + Parent->Offset;
     }
 
 	_buttonSprite.SetPosition(posX, posY);
@@ -113,22 +113,22 @@ void UC_Button::Draw(sf::RenderTarget *window)
 
 void UC_Button::OnHover(int, int, GUI*)
 {
-	_buttonSprite.SetSubRect(sf::IntRect(1, _buttonImg.GetHeight() / 3, _buttonImg.GetWidth(), (_buttonImg.GetHeight() / 3) * 2));
+	_buttonSprite.SetSubRect(sf::IntRect(0, _buttonImg.GetHeight() / 3, _buttonImg.GetWidth(), (_buttonImg.GetHeight() / 3) * 2));
 }
 
 void UC_Button::OnUnhover(int, int, GUI*)
 {
-	_buttonSprite.SetSubRect(sf::IntRect(1, 1, _buttonImg.GetWidth(), _buttonImg.GetHeight() / 3));
+	_buttonSprite.SetSubRect(sf::IntRect(0, 0, _buttonImg.GetWidth(), _buttonImg.GetHeight() / 3));
 }
 
 void UC_Button::OnClick(int, int, GUI*)
 {
-	_buttonSprite.SetSubRect(sf::IntRect(1, (_buttonImg.GetHeight() / 3) * 2, _buttonImg.GetWidth(), (_buttonImg.GetHeight() / 3) * 3));
+	_buttonSprite.SetSubRect(sf::IntRect(0, (_buttonImg.GetHeight() / 3) * 2, _buttonImg.GetWidth(), (_buttonImg.GetHeight() / 3) * 3));
 }
 
 void UC_Button::OnUnclick(int, int, GUI* gui)
 {
-	_buttonSprite.SetSubRect(sf::IntRect(1, _buttonImg.GetHeight() / 3, _buttonImg.GetWidth(), (_buttonImg.GetHeight() / 3) * 2));
+	_buttonSprite.SetSubRect(sf::IntRect(0, _buttonImg.GetHeight() / 3, _buttonImg.GetWidth(), (_buttonImg.GetHeight() / 3) * 2));
 	if(callback != null)
 	{
 		if(callbackParam != null)

@@ -50,7 +50,7 @@ void UC_ComboBox::Draw(sf::RenderTarget *window)
     if(Parent != null)
     {
         posX += Parent->XPos;
-        posY += Parent->YPos;
+        posY += Parent->YPos + Parent->Offset;
     }
 
     window->Draw(sf::Shape::Line(posX, posY + 10, posX + Width, posY + 10, 20, sf::Color(240, 240, 240)));

@@ -38,7 +38,7 @@ void UC_CheckBox::Draw(sf::RenderTarget *window)
     if(Parent != null)
     {
         posX += Parent->XPos;
-        posY += Parent->YPos;
+        posY += Parent->YPos + Parent->Offset;
     }
 
 	_sprite.SetPosition(posX, posY);

@@ -30,7 +30,7 @@ void UC_Line::Draw(sf::RenderTarget *window)
     if(Parent != null)
     {
         posX += Parent->XPos;
-        posY += Parent->YPos;
+        posY += Parent->YPos + Parent->Offset;
     }
 
 	window->Draw(sf::Shape::Line(posX, posY, posX + Width, posY + Height, 1, sf::Color(0, 0, 0)));

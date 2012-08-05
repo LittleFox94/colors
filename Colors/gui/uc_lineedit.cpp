@@ -34,7 +34,7 @@ void UC_LineEdit::Draw(sf::RenderTarget *window)
     if(Parent != null)
     {
         posX += Parent->XPos;
-        posY += Parent->YPos;
+        posY += Parent->YPos + Parent->Offset;
     }
 
 	window->Draw(sf::Shape::Line(posX, posY + Height / 2, posX + Width, posY + Height / 2, Height, sf::Color(240, 240, 240)));
