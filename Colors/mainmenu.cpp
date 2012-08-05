@@ -2,9 +2,11 @@
 
 int MainMenu::_mouseX;
 int MainMenu::_mouseY;
+bool MainMenu::_mouseLeftDown;
 bool MainMenu::_inGame;
 bool MainMenu::_running;
 GUI *MainMenu::_mainMenu;
+UC_Window *MainMenu::_newGameWindow;
 
 void MainMenu::Initialize(sf::RenderWindow *window)
 {
@@ -12,13 +14,16 @@ void MainMenu::Initialize(sf::RenderWindow *window)
     _mouseY = 0;
     _inGame = false;
     _running = true;
+    _mouseLeftDown = false;
 
-    _mainMenu = new GUI();
     BuildMainMenu(window->GetWidth(), window->GetHeight());
+    BuildNewGameWindow();
 }
 
 void MainMenu::BuildMainMenu(int width, int height)
 {
+    _mainMenu = new GUI();
+
     UC_Label *titleLabel = new UC_Label("Colors", sf::Color(0, 0, 0), 80, 40, -7);
     _mainMenu->AddItem(titleLabel);
 
@@ -38,6 +43,29 @@ void MainMenu::BuildMainMenu(int width, int height)
     _mainMenu->AddItem(exitButton);
 }
 
+void MainMenu::BuildNewGameWindow()
+{
+    _newGameWindow = new UC_Window();
+    _newGameWindow->Width = 500;
+    _newGameWindow->Height = 400;
+    _newGameWindow->Title = "Neues Spiel";
+
+    UC_Label *title = new UC_Label("Neues Spiel", sf::Color(0, 0, 0), 24, 5, 24);
+    _newGameWindow->Gui()->AddItem(title);
+
+    UC_Label *numPlayersLabel = new UC_Label("Spieleranzahl:", sf::Color(0, 0, 0), 12, 5, 72);
+    _newGameWindow->Gui()->AddItem(numPlayersLabel);
+
+    UC_ComboBox *numPlayers = new UC_ComboBox(140, 70, 120);
+    numPlayers->AddItem("2");
+    numPlayers->AddItem("3");
+    numPlayers->AddItem("4");
+    _newGameWindow->Gui()->AddItem(numPlayers);
+
+
+    _mainMenu->AddItem(_newGameWindow);
+}
+
 bool MainMenu::Running()
 {
     return _running;
@@ -47,41 +75,61 @@ void MainMenu::DoEvents(sf::RenderWindow *window, sf::Event event)
 {
     switch(event.Type)
     {
-        case sf::Event::MouseMoved:
-            _mouseX = window->GetInput().GetMouseX();
-            _mouseY = window->GetInput().GetMouseY();
+    case sf::Event::MouseMoved:
+    {
+        int mouseX = window->GetInput().GetMouseX();
+        int mouseY = window->GetInput().GetMouseY();
 
-            if(_inGame)
-            {
-            }
-            else
-            {
-                _mainMenu->HoverAtPos(_mouseX, _mouseY);
-            }
-            break;
+        if(_inGame)
+        {
+        }
+        else
+        {
+            _mainMenu->HoverAtPos(_mouseX, _mouseY);
 
-        case sf::Event::MouseButtonPressed:
-            if(_inGame)
+            if(_mouseLeftDown)
             {
+                if(!_mainMenu->MoveControlAt(mouseX, mouseY, _mouseX, _mouseY) || (_mouseX == mouseX && _mouseY == mouseY))
+                    _mainMenu->IsMoving = false;
             }
-            else
+        }
+
+        _mouseX = mouseX;
+        _mouseY = mouseY;
+    }
+    break;
+
+    case sf::Event::MouseButtonPressed:
+        if(_inGame)
+        {
+        }
+        else
+        {
+            if(window->GetInput().IsMouseButtonDown(sf::Mouse::Left))
             {
                 _mainMenu->ClickAtPos(_mouseX, _mouseY);
+                _mouseLeftDown = true;
             }
-            break;
+        }
+        break;
 
-        case sf::Event::MouseButtonReleased:
-            if(_inGame)
-            {
-            }
-            else
+    case sf::Event::MouseButtonReleased:
+        if(_inGame)
+        {
+        }
+        else
+        {
+            if(_mouseLeftDown)
             {
                 _mainMenu->UnclickAtPos(_mouseX, _mouseY);
+                _mouseLeftDown = false;
+                _mainMenu->IsMoving = false;
             }
-            break;
+        }
+        break;
 
-        default:
-            break;
+    default:
+        break;
     }
 }
 

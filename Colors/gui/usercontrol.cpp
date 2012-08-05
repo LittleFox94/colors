@@ -2,6 +2,7 @@
 
 UserControl::UserControl()
 {
+    Parent = null;
 }
 
 UserControl::~UserControl()

@@ -32,8 +32,17 @@ UC_CheckBox::~UC_CheckBox()
 
 void UC_CheckBox::Draw(sf::RenderTarget *window)
 {
-	_sprite.SetPosition(XPos, YPos);
-	_label.SetPosition(XPos + 17, YPos);
+    int posX = XPos;
+    int posY = YPos;
+
+    if(Parent != null)
+    {
+        posX += Parent->XPos;
+        posY += Parent->YPos;
+    }
+
+	_sprite.SetPosition(posX, posY);
+	_label.SetPosition(posX + 17, posY);
 
 	window->Draw(_sprite);
 	window->Draw(_label);

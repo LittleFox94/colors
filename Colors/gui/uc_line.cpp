@@ -24,5 +24,14 @@ UC_Line::~UC_Line()
 
 void UC_Line::Draw(sf::RenderTarget *window)
 {
-	window->Draw(sf::Shape::Line(XPos, YPos, XPos + Width, YPos + Height, 1, sf::Color(0, 0, 0)));
+    int posX = XPos;
+    int posY = YPos;
+
+    if(Parent != null)
+    {
+        posX += Parent->XPos;
+        posY += Parent->YPos;
+    }
+
+	window->Draw(sf::Shape::Line(posX, posY, posX + Width, posY + Height, 1, sf::Color(0, 0, 0)));
 }

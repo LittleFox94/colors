@@ -17,14 +17,17 @@ class MainMenu
 
     private:
         static void BuildMainMenu(int width, int height);
+        static void BuildNewGameWindow();
 
         static int _mouseX;
         static int _mouseY;
+        static bool _mouseLeftDown;
 
         static bool _inGame;
         static bool _running;
 
         static GUI *_mainMenu;
+        static UC_Window *_newGameWindow;
 };
 
 #endif // MAINMENU_H_INCLUDED

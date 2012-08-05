@@ -95,9 +95,19 @@ void UC_Button::Dispose()
 
 void UC_Button::Draw(sf::RenderTarget *window)
 {
-	_buttonSprite.SetPosition(XPos, YPos);
+    int posX = XPos;
+    int posY = YPos;
+
+    if(Parent != null)
+    {
+        posX += Parent->XPos;
+        posY += Parent->YPos;
+    }
+
+	_buttonSprite.SetPosition(posX, posY);
 	window->Draw(_buttonSprite);
 
+    _label->Parent = Parent;
 	_label->Draw(window);
 }
 

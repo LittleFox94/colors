@@ -28,13 +28,22 @@ void UC_LineEdit::OnKeyPressed(char c)
 
 void UC_LineEdit::Draw(sf::RenderTarget *window)
 {
-	window->Draw(sf::Shape::Line(XPos, YPos + Height / 2, XPos + Width, YPos + Height / 2, Height, sf::Color(240, 240, 240)));
+    int posX = XPos;
+    int posY = YPos;
 
-	window->Draw(sf::Shape::Line(XPos, YPos, XPos + Width, YPos, 2, sf::Color(200, 200, 200)));
-	window->Draw(sf::Shape::Line(XPos, YPos, XPos, YPos + Height, 2, sf::Color(200, 200, 200)));
+    if(Parent != null)
+    {
+        posX += Parent->XPos;
+        posY += Parent->YPos;
+    }
 
-	window->Draw(sf::Shape::Line(XPos, YPos + Height, XPos + Width, YPos + Height, 2, sf::Color(255, 255, 255)));
-	window->Draw(sf::Shape::Line(XPos + Width, YPos, XPos + Width, YPos + Height, 2, sf::Color(255, 255, 255)));
+	window->Draw(sf::Shape::Line(posX, posY + Height / 2, posX + Width, posY + Height / 2, Height, sf::Color(240, 240, 240)));
+
+	window->Draw(sf::Shape::Line(posX, posY, posX + Width, posY, 2, sf::Color(200, 200, 200)));
+	window->Draw(sf::Shape::Line(posX, posY, posX, posY + Height, 2, sf::Color(200, 200, 200)));
+
+	window->Draw(sf::Shape::Line(posX, posY + Height, posX + Width, posY + Height, 2, sf::Color(255, 255, 255)));
+	window->Draw(sf::Shape::Line(posX + Width, posY, posX + Width, posY + Height, 2, sf::Color(255, 255, 255)));
 
 	int maxChars = ((Width / (Height - 4)) * 2) - 1;
 
@@ -47,7 +56,7 @@ void UC_LineEdit::Draw(sf::RenderTarget *window)
 
 	sf::String text;
 	text.SetText(temp);
-	text.SetPosition(XPos+ 2, YPos);
+	text.SetPosition(posX+ 2, posY);
 	text.SetFont(sf::Font::GetDefaultFont());
 	text.SetSize(Height - 4);
 	text.SetColor(sf::Color(0, 0, 0));
@@ -58,7 +67,7 @@ void UC_LineEdit::Draw(sf::RenderTarget *window)
 		aniState++;
 
 		if(aniState < 60)
-			window->Draw(sf::Shape::Line(XPos + text.GetRect().GetWidth() + 4, YPos + 2, XPos + text.GetRect().GetWidth() + 4, YPos + Height - 2, 1, sf::Color(0, 0, 0)));
+			window->Draw(sf::Shape::Line(posX + text.GetRect().GetWidth() + 4, posY + 2, posX + text.GetRect().GetWidth() + 4, posY + Height - 2, 1, sf::Color(0, 0, 0)));
 		else if(aniState >= 120)
 			aniState = 0;
 	}

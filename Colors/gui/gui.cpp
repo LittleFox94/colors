@@ -1,12 +1,14 @@
 #include "../include/gui/gui.h"
 
-GUI::GUI()
+GUI::GUI(UserControl *parent)
 {
-	_firstGuiItem = null;
+    _firstGuiItem = null;
 	_lastGuiItem = null;
 	FocusedItem = null;
 	hasChanged = true;
 	IsMoving = false;
+
+    _parentControl = parent;
 }
 
 GUI::~GUI()
@@ -54,6 +56,8 @@ void GUI::AddItem(UserControl *control)
 		_lastGuiItem = newItem;
 		_firstGuiItem = newItem;
 	}
+
+	control->Parent = _parentControl;
 
 	printf(string("[ GUI ] New UserControl added!\n").c_str());
 }

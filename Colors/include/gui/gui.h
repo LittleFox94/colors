@@ -24,7 +24,7 @@ typedef struct GUI_ITEM GUI_ITEM_T;
 class GUI
 {
 	public:
-		GUI();
+		GUI(UserControl *parent = null);
 		virtual ~GUI();
 
 		void DrawItems(sf::RenderTarget *);
@@ -43,6 +43,8 @@ class GUI
 	private:
 		GUI_ITEM_T *_firstGuiItem;
 		GUI_ITEM_T *_lastGuiItem;
+
+		UserControl *_parentControl;
 };
 
 #endif

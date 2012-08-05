@@ -27,6 +27,15 @@ void UC_Label::Dispose()
 
 void UC_Label::Draw(sf::RenderTarget *window)
 {
-	_s.SetPosition(XPos, YPos);
+    int posX = XPos;
+    int posY = YPos;
+
+    if(Parent != null)
+    {
+        posX += Parent->XPos;
+        posY += Parent->YPos;
+    }
+
+	_s.SetPosition(posX, posY);
 	window->Draw(_s);
 }
