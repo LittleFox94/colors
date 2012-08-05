@@ -69,8 +69,10 @@
 		<Unit filename="include\gui\usercontrol.h" />
 		<Unit filename="include\main.h" />
 		<Unit filename="include\mainmenu.h" />
+		<Unit filename="include\newgameform.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="mainmenu.cpp" />
+		<Unit filename="newgameform.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
