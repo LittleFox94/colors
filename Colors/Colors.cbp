@@ -32,7 +32,7 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add directory="D:\SDKs\SFML-1.6\include" />
+			<Add directory="..\..\3rd-party\include" />
 		</Compiler>
 		<Linker>
 			<Add option="-static-libgcc" />
@@ -45,7 +45,7 @@
 			<Add library="gdi32" />
 			<Add library="winmm" />
 			<Add library="freetype" />
-			<Add directory="D:\SDKs\SFML-1.6\lib" />
+			<Add directory="..\..\3rd-party\lib" />
 		</Linker>
 		<Unit filename="gui\gui.cpp" />
 		<Unit filename="gui\uc_button.cpp" />
