@@ -124,12 +124,6 @@ void MainMenu::DoEvents(sf::RenderWindow *window, sf::Event event)
     default:
         break;
     }
-
-    if(_closeNewGameForm)
-    {
-        _mainMenu->RemoveItem(_newGameWindow);
-        _closeNewGameForm = false;
-    }
 }
 
 void MainMenu::Draw(sf::RenderTarget *target)
@@ -150,10 +144,11 @@ void MainMenu::ExitButtonClickHandler()
 
 void MainMenu::NewSinglePlayerGameClickHandler()
 {
+    _mainMenu->RemoveItem(_newGameWindow);
     _mainMenu->AddItem(_newGameWindow);
 }
 
 void MainMenu::NewGameCancelHandler()
 {
-    _closeNewGameForm = true;
+    _mainMenu->RemoveItem(_newGameWindow);
 }

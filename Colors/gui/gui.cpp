@@ -73,7 +73,7 @@ void GUI::RemoveItem(UserControl *control)
 {
     struct GUI_ITEM *current = _firstGuiItem;
 
-    while(current->control != control && current != null)
+    while(current != null && current->control != control)
     {
         current = current->next;
     }
@@ -111,6 +111,8 @@ void GUI::RemoveItem(UserControl *control)
     }
 
     delete current;
+
+    printf(string("[ GUI ] UserControl removed!\n").c_str());
 }
 
 void GUI::HoverAtPos(int posX, int posY)

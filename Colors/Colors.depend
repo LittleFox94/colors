@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1344119656 source:d:\projekte\c++\colors\trunk\colors\main.cpp
+1344167112 source:d:\projekte\c++\colors\trunk\colors\main.cpp
 	<SFML/Graphics.hpp>
 	"include/mainmenu.h"
 
@@ -247,14 +247,15 @@
 	<SFML/Graphics/Rect.hpp>
 	<string>
 
-1344117560 d:\projekte\c++\colors\trunk\colors\include\mainmenu.h
+1344167112 d:\projekte\c++\colors\trunk\colors\include\mainmenu.h
 	<SFML/Graphics.hpp>
 	"gui/gui.h"
+	"newgameform.h"
 
-1344116666 source:d:\projekte\c++\colors\trunk\colors\gui\gui.cpp
+1344170816 source:d:\projekte\c++\colors\trunk\colors\gui\gui.cpp
 	"../include/gui/gui.h"
 
-1344115016 d:\projekte\c++\colors\trunk\colors\include\gui\gui.h
+1344167112 d:\projekte\c++\colors\trunk\colors\include\gui\gui.h
 	"usercontrol.h"
 	"uc_button.h"
 	"uc_checkbox.h"
@@ -265,69 +266,76 @@
 	"uc_progressbar.h"
 	"uc_window.h"
 
-1344115224 d:\projekte\c++\colors\trunk\colors\include\gui\usercontrol.h
+1344167112 d:\projekte\c++\colors\trunk\colors\include\gui\usercontrol.h
 	<SFML/Graphics.hpp>
 	"../main.h"
 
-1344115244 d:\projekte\c++\colors\trunk\colors\include\main.h
+1344167112 d:\projekte\c++\colors\trunk\colors\include\main.h
 	<string>
 	<stdio.h>
 	<SFML/Graphics.hpp>
 
-1344115152 d:\projekte\c++\colors\trunk\colors\include\gui\uc_button.h
+1344167112 d:\projekte\c++\colors\trunk\colors\include\gui\uc_button.h
 	"usercontrol.h"
+	"uc_label.h"
 
-1344115122 d:\projekte\c++\colors\trunk\colors\include\gui\uc_checkbox.h
+1344167112 d:\projekte\c++\colors\trunk\colors\include\gui\uc_checkbox.h
 	"UserControl.h"
 	"gui.h"
 
-1344115052 d:\projekte\c++\colors\trunk\colors\include\gui\uc_combobox.h
+1344167112 d:\projekte\c++\colors\trunk\colors\include\gui\uc_combobox.h
 	"UserControl.h"
 
-1344115052 d:\projekte\c++\colors\trunk\colors\include\gui\uc_label.h
+1344167112 d:\projekte\c++\colors\trunk\colors\include\gui\uc_label.h
 	"usercontrol.h"
 
-1344115052 d:\projekte\c++\colors\trunk\colors\include\gui\uc_line.h
+1344167112 d:\projekte\c++\colors\trunk\colors\include\gui\uc_line.h
 	"usercontrol.h"
 
-1344115126 d:\projekte\c++\colors\trunk\colors\include\gui\uc_lineedit.h
+1344167112 d:\projekte\c++\colors\trunk\colors\include\gui\uc_lineedit.h
 	"usercontrol.h"
 
-1344115052 d:\projekte\c++\colors\trunk\colors\include\gui\uc_progressbar.h
+1344167112 d:\projekte\c++\colors\trunk\colors\include\gui\uc_progressbar.h
 	"usercontrol.h"
 
-1344115052 d:\projekte\c++\colors\trunk\colors\include\gui\uc_window.h
-	"usercontrol.h"
+1344167112 d:\projekte\c++\colors\trunk\colors\include\gui\uc_window.h
+	"gui.h"
 
-1344115400 source:d:\projekte\c++\colors\trunk\colors\gui\uc_button.cpp
+1344167112 source:d:\projekte\c++\colors\trunk\colors\gui\uc_button.cpp
 	"../include/gui/uc_button.h"
 	"../include/gui/gui.h"
 
-1344115364 source:d:\projekte\c++\colors\trunk\colors\gui\uc_checkbox.cpp
+1344167112 source:d:\projekte\c++\colors\trunk\colors\gui\uc_checkbox.cpp
 	"../include/gui/uc_checkbox.h"
 
-1344115366 source:d:\projekte\c++\colors\trunk\colors\gui\uc_combobox.cpp
+1344167112 source:d:\projekte\c++\colors\trunk\colors\gui\uc_combobox.cpp
 	"../include/gui/uc_combobox.h"
 
-1344115366 source:d:\projekte\c++\colors\trunk\colors\gui\uc_label.cpp
+1344167112 source:d:\projekte\c++\colors\trunk\colors\gui\uc_label.cpp
 	"../include/gui/uc_label.h"
 
-1344115366 source:d:\projekte\c++\colors\trunk\colors\gui\uc_line.cpp
+1344167112 source:d:\projekte\c++\colors\trunk\colors\gui\uc_line.cpp
 	"../include/gui/uc_line.h"
 
-1344115566 source:d:\projekte\c++\colors\trunk\colors\gui\uc_lineedit.cpp
+1344167112 source:d:\projekte\c++\colors\trunk\colors\gui\uc_lineedit.cpp
 	"../include/gui/uc_lineedit.h"
 
-1344115366 source:d:\projekte\c++\colors\trunk\colors\gui\uc_progressbar.cpp
+1344167112 source:d:\projekte\c++\colors\trunk\colors\gui\uc_progressbar.cpp
 	"../include/gui/uc_progressbar.h"
 
-1344115368 source:d:\projekte\c++\colors\trunk\colors\gui\uc_window.cpp
+1344167112 source:d:\projekte\c++\colors\trunk\colors\gui\uc_window.cpp
 	"../include/gui/uc_window.h"
 	"../include/gui/gui.h"
 
-1344115368 source:d:\projekte\c++\colors\trunk\colors\gui\usercontrol.cpp
+1344167112 source:d:\projekte\c++\colors\trunk\colors\gui\usercontrol.cpp
 	"../include/gui/usercontrol.h"
 
-1344117580 source:d:\projekte\c++\colors\trunk\colors\mainmenu.cpp
+1344170740 source:d:\projekte\c++\colors\trunk\colors\mainmenu.cpp
 	"include/mainmenu.h"
+
+1344167112 d:\projekte\c++\colors\trunk\colors\include\newgameform.h
+	"gui/gui.h"
+
+1344167112 source:d:\projekte\c++\colors\trunk\colors\newgameform.cpp
+	"include/newgameform.h"
 
