@@ -5,6 +5,7 @@ int MainMenu::_mouseY;
 bool MainMenu::_mouseLeftDown;
 bool MainMenu::_inGame;
 bool MainMenu::_running;
+bool MainMenu::_closeNewGameForm;
 GUI *MainMenu::_mainMenu;
 UC_Window *MainMenu::_newGameWindow;
 
@@ -30,10 +31,10 @@ void MainMenu::BuildMainMenu(int width, int height)
     UC_Line *titleUnderline = new UC_Line(40, 80, 250, false);
     _mainMenu->AddItem(titleUnderline);
 
-    UC_Button *singlePlayerButton = new UC_Button("res/img/gui/bigButton.png", "Einzelspieler", 5, 100, NULL);
+    UC_Button *singlePlayerButton = new UC_Button("res/img/gui/bigButton.png", "Einzelspieler", 5, 100, (void*)NewSinglePlayerGameClickHandler);
     _mainMenu->AddItem(singlePlayerButton);
 
-    UC_Button *multiPlayerLocalButton = new UC_Button("res/img/gui/bigButton.png", "Mehrspieler (Lokal)", 5, 155, NULL);
+    UC_Button *multiPlayerLocalButton = new UC_Button("res/img/gui/bigButton.png", "Mehrspieler", 5, 155, NULL);
     _mainMenu->AddItem(multiPlayerLocalButton);
 
     UC_Button *multiPlayerNetworkButton = new UC_Button("res/img/gui/bigButton.png", "Netzwerkspiel", 5, 210, NULL);
@@ -45,43 +46,7 @@ void MainMenu::BuildMainMenu(int width, int height)
 
 void MainMenu::BuildNewGameWindow()
 {
-    _newGameWindow = new UC_Window();
-    _newGameWindow->Width = 500;
-    _newGameWindow->Height = 400;
-    _newGameWindow->Title = "Neues Spiel";
-
-    UC_Label *title = new UC_Label("Neues Spiel", sf::Color(0, 0, 0), 24, 5, 5);
-    _newGameWindow->Gui()->AddItem(title);
-
-    UC_Label *numPlayersLabel = new UC_Label("Spieleranzahl:", sf::Color(0, 0, 0), 12, 5, 52);
-    _newGameWindow->Gui()->AddItem(numPlayersLabel);
-
-    UC_ComboBox *numPlayers = new UC_ComboBox(140, 50, 120);
-    numPlayers->AddItem("2");
-    numPlayers->AddItem("3");
-    numPlayers->AddItem("4");
-    numPlayers->SetCurrentIndex(0);
-    _newGameWindow->Gui()->AddItem(numPlayers);
-
-    UC_Label *numColorsLabel = new UC_Label("Farbenanzahl:", sf::Color(0, 0, 0), 12, 5, 82);
-    _newGameWindow->Gui()->AddItem(numColorsLabel);
-
-    UC_ComboBox *numColors = new UC_ComboBox(140, 80, 120);
-    numColors->AddItem("4 (Leicht)");
-    numColors->AddItem("5");
-    numColors->AddItem("6");
-    numColors->AddItem("7");
-    numColors->AddItem("8");
-    numColors->AddItem("9");
-    numColors->AddItem("10 (Sehr Schwer)");
-    numColors->SetCurrentIndex(0);
-    _newGameWindow->Gui()->AddItem(numColors);
-
-    UC_Button *createGameButton = new UC_Button("res/img/gui/button.png", "Spiel starten", 500 - 125, 380 - 30, NULL);
-    _newGameWindow->Gui()->AddItem(createGameButton);
-
-    UC_Button *cancelButton = new UC_Button("res/img/gui/button.png", "Abbrechen", 500 - 250, 380 - 30, NULL);
-    _newGameWindow->Gui()->AddItem(cancelButton)
+    _newGameWindow = new NewGameForm((void*)NewGameCancelHandler);
 }
 
 bool MainMenu::Running()
@@ -146,8 +111,24 @@ void MainMenu::DoEvents(sf::RenderWindow *window, sf::Event event)
         }
         break;
 
+    case sf::Event::KeyPressed:
+        if(_inGame)
+        {
+        }
+        else
+        {
+            if(_mainMenu->FocusedItem != null)
+                _mainMenu->FocusedItem->control->OnKeyPressed(event.Text.Unicode);
+        }
+        break;
     default:
         break;
+    }
+
+    if(_closeNewGameForm)
+    {
+        _mainMenu->RemoveItem(_newGameWindow);
+        _closeNewGameForm = false;
     }
 }
 
@@ -165,4 +146,14 @@ void MainMenu::Draw(sf::RenderTarget *target)
 void MainMenu::ExitButtonClickHandler()
 {
     _running = false;
+}
+
+void MainMenu::NewSinglePlayerGameClickHandler()
+{
+    _mainMenu->AddItem(_newGameWindow);
+}
+
+void MainMenu::NewGameCancelHandler()
+{
+    _closeNewGameForm = true;
 }

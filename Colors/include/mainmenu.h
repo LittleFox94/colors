@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "gui/gui.h"
+#include "newgameform.h"
 
 class MainMenu
 {
@@ -13,11 +14,13 @@ class MainMenu
         static void Draw(sf::RenderTarget *target);
         static bool Running();
 
-        static void ExitButtonClickHandler();
-
     private:
         static void BuildMainMenu(int width, int height);
         static void BuildNewGameWindow();
+
+        static void ExitButtonClickHandler();
+        static void NewSinglePlayerGameClickHandler();
+        static void NewGameCancelHandler();
 
         static int _mouseX;
         static int _mouseY;
@@ -25,6 +28,7 @@ class MainMenu
 
         static bool _inGame;
         static bool _running;
+        static bool _closeNewGameForm;
 
         static GUI *_mainMenu;
         static UC_Window *_newGameWindow;

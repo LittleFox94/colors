@@ -64,6 +64,8 @@ void GUI::AddItem(UserControl *control)
 
 	control->Parent = _parentControl;
 
+    FocusedItem = null;
+
 	printf(string("[ GUI ] New UserControl added!\n").c_str());
 }
 
@@ -91,6 +93,11 @@ void GUI::RemoveItem(UserControl *control)
     {
         _lastGuiItem = current->last;
         _lastGuiItem->next = null;
+    }
+
+    if(current == FocusedItem)
+    {
+        FocusedItem = null;
     }
 
     if(current->last != null)
