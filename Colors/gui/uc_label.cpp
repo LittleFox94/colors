@@ -4,7 +4,8 @@ UC_Label::UC_Label(string text, sf::Color color, int size, int x, int y)
 {
 	_s.SetColor(color);
 
-	_font = sf::Font::GetDefaultFont();
+	_font = sf::Font();
+	_font.LoadFromFile("res/fonts/kaliberr.ttf", size);
 
 	_s.SetFont(_font);
 	_s.SetPosition(x, y);

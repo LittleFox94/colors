@@ -2,6 +2,7 @@
 #define UC_BUTTON_H
 
 #include "usercontrol.h"
+#include "uc_label.h"
 
 class UC_Button : public UserControl
 {
@@ -15,7 +16,7 @@ class UC_Button : public UserControl
 		UC_Button(string imgFileName, int, int, void *cb, void *param);
 		UC_Button(string imgFileName, string caption, int, int, void *cb, void *param);
 		virtual ~UC_Button();
-		sf::String _label;
+		UC_Label *_label;
 
 		void Draw(sf::RenderTarget *);
 		void OnHover(int, int, GUI*);

@@ -44,12 +44,7 @@ UC_Button::UC_Button(string imgFileName, string caption, int posX, int posY, voi
 
 	callback = cb;
 
-	_label.SetPosition(posX + 10, posY + 5);
-	_label.SetSize(12);
-	_label.SetText(caption);
-	_label.SetColor(sf::Color(255, 255, 255));
-	_label.SetFont(sf::Font::GetDefaultFont());
-	_label.SetBlendMode(sf::Blend::Add);
+    _label = new UC_Label(caption, sf::Color(255, 255, 255), Height / 3, XPos + 10, YPos + (Height / 4));
 }
 
 UC_Button::UC_Button(string imgFileName, int posX, int posY, void *cb, void *param)
@@ -85,12 +80,7 @@ UC_Button::UC_Button(string imgFileName, string caption, int posX, int posY, voi
 	callback = cb;
 	callbackParam = param;
 
-	_label.SetPosition(posX + 10, posY + 5);
-	_label.SetSize(12);
-	_label.SetText(caption);
-	_label.SetColor(sf::Color(255, 255, 255));
-	_label.SetFont(sf::Font::GetDefaultFont());
-	_label.SetBlendMode(sf::Blend::Add);
+	_label = new UC_Label(caption, sf::Color(255, 255, 255), Height / 3, XPos + 10, YPos + (Height / 4));
 }
 
 UC_Button::~UC_Button()
@@ -106,9 +96,9 @@ void UC_Button::Dispose()
 void UC_Button::Draw(sf::RenderTarget *window)
 {
 	_buttonSprite.SetPosition(XPos, YPos);
-	_label.SetPosition(XPos + 10, YPos + 5);
 	window->Draw(_buttonSprite);
-	window->Draw(_label);
+
+	_label->Draw(window);
 }
 
 void UC_Button::OnHover(int, int, GUI*)

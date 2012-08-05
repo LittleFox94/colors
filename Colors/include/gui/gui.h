@@ -29,6 +29,7 @@ class GUI
 
 		void DrawItems(sf::RenderTarget *);
 		void AddItem(UserControl *control);
+		void RemoveItem(UserControl *control);
 		void HoverAtPos(int, int);
 		void ClickAtPos(int, int);
 		void UnclickAtPos(int, int);

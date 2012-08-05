@@ -45,22 +45,56 @@ void GUI::AddItem(UserControl *control)
 	if(_lastGuiItem != null)
 	{
 		newItem->last = _lastGuiItem;
-		_lastGuiItem->next = (GUI_ITEM_T*)malloc(sizeof(newItem));
 		_lastGuiItem->next = newItem;
 
-
-		_lastGuiItem = _lastGuiItem->next;
-
-		//printf("Addr. next: %x; addr. newItem: %x; addr. last: %x\n", _lastGuiItem->next, newItem, _lastGuiItem->last);
+		_lastGuiItem = newItem;
 	}
 	else
 	{
-		_lastGuiItem = (GUI_ITEM_T*)malloc(sizeof(newItem));
 		_lastGuiItem = newItem;
-		_firstGuiItem = _lastGuiItem;
+		_firstGuiItem = newItem;
 	}
 
 	printf(string("[ GUI ] New UserControl added!\n").c_str());
+}
+
+void GUI::RemoveItem(UserControl *control)
+{
+    struct GUI_ITEM *current = _firstGuiItem;
+
+    while(current->control != control && current != null)
+    {
+        current = current->next;
+    }
+
+    if(current == null)
+    {
+        return;
+    }
+
+    if(current == _firstGuiItem)
+    {
+        _firstGuiItem = current->next;
+        _firstGuiItem->last = null;
+    }
+
+    if(current == _lastGuiItem)
+    {
+        _lastGuiItem = current->last;
+        _lastGuiItem->next = null;
+    }
+
+    if(current->last != null)
+    {
+        current->last->next = current->next;
+    }
+
+    if(current->next != null)
+    {
+        current->next->last = current->last;
+    }
+
+    delete current;
 }
 
 void GUI::HoverAtPos(int posX, int posY)
