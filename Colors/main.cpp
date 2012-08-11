@@ -3,7 +3,7 @@
 
 int main(int argc, char *argv[])
 {
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Colors", sf::Style::Fullscreen);
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Colors", /*sf::Style::Fullscreen*/);
 
     sf::Image *background = new sf::Image();
     background->LoadFromFile("res/img/background.png");

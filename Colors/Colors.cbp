@@ -6,20 +6,30 @@
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="Debug">
-				<Option output="bin\Debug\Colors" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="bin\Debug\" />
-				<Option object_output="obj\Debug\" />
+			<Target title="Debug_win32">
+				<Option output="bin/Debug/Colors" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Debug/" />
+				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
+				<Linker>
+					<Add library="opengl32" />
+					<Add library="gdi32" />
+					<Add library="winmm" />
+					<Add library="sfml-window-s" />
+					<Add library="sfml-audio-s" />
+					<Add library="sfml-graphics-s" />
+					<Add library="sfml-network-s" />
+					<Add library="sfml-system-s" />
+				</Linker>
 			</Target>
-			<Target title="Release">
-				<Option output="bin\Release\Colors" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="bin\Release\" />
-				<Option object_output="obj\Release\" />
+			<Target title="Release_win32">
+				<Option output="bin/Release/Colors" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Release/" />
+				<Option object_output="obj/Release/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -27,51 +37,86 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add library="opengl32" />
+					<Add library="gdi32" />
+					<Add library="winmm" />
+					<Add library="sfml-window-s" />
+					<Add library="sfml-audio-s" />
+					<Add library="sfml-graphics-s" />
+					<Add library="sfml-network-s" />
+					<Add library="sfml-system-s" />
+				</Linker>
+			</Target>
+			<Target title="Release_linux">
+				<Option output="bin/Release/Colors" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Release/" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="sfml-window" />
+					<Add library="sfml-audio" />
+					<Add library="sfml-graphics" />
+					<Add library="sfml-network" />
+					<Add library="sfml-system" />
+				</Linker>
+			</Target>
+			<Target title="Debug_linux">
+				<Option output="bin/Debug/Colors" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Debug/" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add library="sfml-window" />
+					<Add library="sfml-audio" />
+					<Add library="sfml-graphics" />
+					<Add library="sfml-network" />
+					<Add library="sfml-system" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add directory="..\..\3rd-party\include" />
+			<Add directory="../../3rd-party/include" />
 		</Compiler>
 		<Linker>
 			<Add option="-static-libgcc" />
-			<Add library="sfml-window-s" />
-			<Add library="sfml-audio-s" />
-			<Add library="sfml-graphics-s" />
-			<Add library="sfml-network-s" />
-			<Add library="sfml-system-s" />
-			<Add library="opengl32" />
-			<Add library="gdi32" />
-			<Add library="winmm" />
 			<Add library="freetype" />
-			<Add directory="..\..\3rd-party\lib" />
+			<Add directory="../../3rd-party/lib" />
 		</Linker>
 		<Unit filename="gamelogic.cpp" />
-		<Unit filename="gui\gui.cpp" />
-		<Unit filename="gui\uc_button.cpp" />
-		<Unit filename="gui\uc_checkbox.cpp" />
-		<Unit filename="gui\uc_combobox.cpp" />
-		<Unit filename="gui\uc_label.cpp" />
-		<Unit filename="gui\uc_line.cpp" />
-		<Unit filename="gui\uc_lineedit.cpp" />
-		<Unit filename="gui\uc_progressbar.cpp" />
-		<Unit filename="gui\uc_window.cpp" />
-		<Unit filename="gui\usercontrol.cpp" />
-		<Unit filename="include\gamelogic.h" />
-		<Unit filename="include\gui\gui.h" />
-		<Unit filename="include\gui\uc_button.h" />
-		<Unit filename="include\gui\uc_checkbox.h" />
-		<Unit filename="include\gui\uc_combobox.h" />
-		<Unit filename="include\gui\uc_label.h" />
-		<Unit filename="include\gui\uc_line.h" />
-		<Unit filename="include\gui\uc_lineedit.h" />
-		<Unit filename="include\gui\uc_progressbar.h" />
-		<Unit filename="include\gui\uc_window.h" />
-		<Unit filename="include\gui\usercontrol.h" />
-		<Unit filename="include\main.h" />
-		<Unit filename="include\mainmenu.h" />
-		<Unit filename="include\newgameform.h" />
+		<Unit filename="gui/gui.cpp" />
+		<Unit filename="gui/uc_button.cpp" />
+		<Unit filename="gui/uc_checkbox.cpp" />
+		<Unit filename="gui/uc_combobox.cpp" />
+		<Unit filename="gui/uc_label.cpp" />
+		<Unit filename="gui/uc_line.cpp" />
+		<Unit filename="gui/uc_lineedit.cpp" />
+		<Unit filename="gui/uc_progressbar.cpp" />
+		<Unit filename="gui/uc_window.cpp" />
+		<Unit filename="gui/usercontrol.cpp" />
+		<Unit filename="include/gamelogic.h" />
+		<Unit filename="include/gui/gui.h" />
+		<Unit filename="include/gui/uc_button.h" />
+		<Unit filename="include/gui/uc_checkbox.h" />
+		<Unit filename="include/gui/uc_combobox.h" />
+		<Unit filename="include/gui/uc_label.h" />
+		<Unit filename="include/gui/uc_line.h" />
+		<Unit filename="include/gui/uc_lineedit.h" />
+		<Unit filename="include/gui/uc_progressbar.h" />
+		<Unit filename="include/gui/uc_window.h" />
+		<Unit filename="include/gui/usercontrol.h" />
+		<Unit filename="include/main.h" />
+		<Unit filename="include/mainmenu.h" />
+		<Unit filename="include/newgameform.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="mainmenu.cpp" />
 		<Unit filename="newgameform.cpp" />
