@@ -17,7 +17,6 @@ class UC_ComboBox : public UserControl
 		UC_ComboBox(int, int, int);
 		virtual ~UC_ComboBox();
 
-		void Dispose();
 		void Draw(sf::RenderTarget*);
 		void OnHover(int, int, GUI*);
 		void OnUnhover(int, int, GUI*);
@@ -32,8 +31,8 @@ class UC_ComboBox : public UserControl
 		int _scrollOffset;
 		int _hoveredItem;
 
-		sf::Image _buttonImg;
-		sf::Sprite _buttonSprite;
+		sf::Image *_buttonImg;
+		sf::Sprite *_buttonSprite;
 		bool _isOpened;
 		struct COMBOBOX_ITEM *_firstItem;
 		struct COMBOBOX_ITEM *_lastItem;

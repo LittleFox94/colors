@@ -7,9 +7,12 @@ UC_ComboBox::UC_ComboBox(int x, int y, int w)
     Width = w;
     Height = 20;
 
-    _buttonImg.LoadFromFile("res/img/gui/combobox.png");
-    _buttonSprite.SetImage(_buttonImg);
-    _buttonSprite.SetSubRect(sf::IntRect(0, 0, _buttonImg.GetWidth(), _buttonImg.GetHeight() / 3));
+	_buttonImg = new sf::Image();
+    _buttonImg->LoadFromFile("res/img/gui/combobox.png");
+
+    _buttonSprite = new sf::Sprite();
+    _buttonSprite->SetImage(*_buttonImg);
+    _buttonSprite->SetSubRect(sf::IntRect(0, 0, _buttonImg->GetWidth(), _buttonImg->GetHeight() / 3));
 
     _isOpened = false;
 
@@ -20,10 +23,8 @@ UC_ComboBox::UC_ComboBox(int x, int y, int w)
 
 UC_ComboBox::~UC_ComboBox()
 {
-}
-
-void UC_ComboBox::Dispose()
-{
+	delete _buttonSprite;
+	delete _buttonImg;
 }
 
 void UC_ComboBox::SetCurrentIndex(int index)
@@ -55,8 +56,8 @@ void UC_ComboBox::Draw(sf::RenderTarget *window)
 
     window->Draw(sf::Shape::Line(posX, posY + 10, posX + Width, posY + 10, 20, sf::Color(240, 240, 240)));
 
-    _buttonSprite.SetPosition(posX + Width - 15, posY);
-    window->Draw(_buttonSprite);
+    _buttonSprite->SetPosition(posX + Width - 15, posY);
+    window->Draw(*_buttonSprite);
 
     if(_currentItem != null)
     {
@@ -126,7 +127,7 @@ void UC_ComboBox::AddItem(string caption)
 
 void UC_ComboBox::OnHover(int x, int y, GUI*)
 {
-    _buttonSprite.SetSubRect(sf::IntRect(0, _buttonImg.GetHeight() / 3, _buttonImg.GetWidth(), (_buttonImg.GetHeight() / 3) * 2));
+    _buttonSprite->SetSubRect(sf::IntRect(0, _buttonImg->GetHeight() / 3, _buttonImg->GetWidth(), (_buttonImg->GetHeight() / 3) * 2));
 
     if(y - YPos - 20> 0)
     {
@@ -136,12 +137,12 @@ void UC_ComboBox::OnHover(int x, int y, GUI*)
 
 void UC_ComboBox::OnUnhover(int, int, GUI*)
 {
-    _buttonSprite.SetSubRect(sf::IntRect(0, 0, _buttonImg.GetWidth(), _buttonImg.GetHeight() / 3));
+    _buttonSprite->SetSubRect(sf::IntRect(0, 0, _buttonImg->GetWidth(), _buttonImg->GetHeight() / 3));
 }
 
 void UC_ComboBox::OnClick(int x, int y, GUI*)
 {
-    _buttonSprite.SetSubRect(sf::IntRect(0, (_buttonImg.GetHeight() / 3) * 2, _buttonImg.GetWidth(), (_buttonImg.GetHeight() / 3) * 3));
+    _buttonSprite->SetSubRect(sf::IntRect(0, (_buttonImg->GetHeight() / 3) * 2, _buttonImg->GetWidth(), (_buttonImg->GetHeight() / 3) * 3));
 
     if(y - YPos - 20 > 0)
     {
@@ -166,7 +167,7 @@ void UC_ComboBox::OnClick(int x, int y, GUI*)
 
 void UC_ComboBox::OnUnclick(int, int, GUI* gui)
 {
-    _buttonSprite.SetSubRect(sf::IntRect(0, _buttonImg.GetHeight() / 3, _buttonImg.GetWidth(), (_buttonImg.GetHeight() / 3) * 2));
+    _buttonSprite->SetSubRect(sf::IntRect(0, _buttonImg->GetHeight() / 3, _buttonImg->GetWidth(), (_buttonImg->GetHeight() / 3) * 2));
     _isOpened = !_isOpened;
 
     if(_isOpened)

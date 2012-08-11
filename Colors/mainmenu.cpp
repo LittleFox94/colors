@@ -7,7 +7,9 @@ bool MainMenu::_inGame;
 bool MainMenu::_running;
 bool MainMenu::_closeNewGameForm;
 GUI *MainMenu::_mainMenu;
-UC_Window *MainMenu::_newGameWindow;
+NewGameForm *MainMenu::_newGameWindow;
+GameLogic *MainMenu::_logic;
+sf::String *MainMenu::_fps;
 
 void MainMenu::Initialize(sf::RenderWindow *window)
 {
@@ -16,9 +18,15 @@ void MainMenu::Initialize(sf::RenderWindow *window)
     _inGame = false;
     _running = true;
     _mouseLeftDown = false;
+    _logic = null;
+
+    _fps = new sf::String();
+    _fps->SetFont(sf::Font::GetDefaultFont());
+    _fps->SetSize(12);
+    _fps->SetPosition(0, 0);
+    _fps->SetColor(sf::Color(0, 0, 0));
 
     BuildMainMenu(window->GetWidth(), window->GetHeight());
-    BuildNewGameWindow();
 }
 
 void MainMenu::BuildMainMenu(int width, int height)
@@ -42,11 +50,6 @@ void MainMenu::BuildMainMenu(int width, int height)
 
     UC_Button *exitButton = new UC_Button("res/img/gui/bigButton.png", "Beenden", 5, height - 55, (void*)ExitButtonClickHandler);
     _mainMenu->AddItem(exitButton);
-}
-
-void MainMenu::BuildNewGameWindow()
-{
-    _newGameWindow = new NewGameForm((void*)NewGameCancelHandler);
 }
 
 bool MainMenu::Running()
@@ -124,17 +127,32 @@ void MainMenu::DoEvents(sf::RenderWindow *window, sf::Event event)
     default:
         break;
     }
+
+    if(_closeNewGameForm)
+    {
+    	_mainMenu->RemoveItem(_newGameWindow);
+		delete _newGameWindow;
+		_newGameWindow = null;
+		_closeNewGameForm = false;
+    }
 }
 
-void MainMenu::Draw(sf::RenderTarget *target)
+void MainMenu::Draw(sf::RenderWindow *target)
 {
     if(_inGame)
     {
+        _logic->Render(target);
     }
     else
     {
         _mainMenu->DrawItems(target);
     }
+
+    float fps = 1.0 / target->GetFrameTime();
+    char fpsLabel[50];
+    sprintf(fpsLabel, "%d FPS", (int)fps);
+    _fps->SetText(fpsLabel);
+    target->Draw(*_fps);
 }
 
 void MainMenu::ExitButtonClickHandler()
@@ -144,11 +162,22 @@ void MainMenu::ExitButtonClickHandler()
 
 void MainMenu::NewSinglePlayerGameClickHandler()
 {
-    _mainMenu->RemoveItem(_newGameWindow);
-    _mainMenu->AddItem(_newGameWindow);
+    if(_newGameWindow == null)
+    {
+        _newGameWindow = new NewGameForm((void*)NewGameCancelHandler, (void*)NewGameStartHandler);
+        _mainMenu->AddItem(_newGameWindow);
+    }
 }
 
 void MainMenu::NewGameCancelHandler()
 {
-    _mainMenu->RemoveItem(_newGameWindow);
+    _closeNewGameForm = true;
+}
+
+void MainMenu::NewGameStartHandler()
+{
+    _closeNewGameForm = true;
+
+    _logic = new GameLogic(_newGameWindow->GetFieldWidth(), _newGameWindow->GetFieldHeight(), _newGameWindow->GetNumColors());
+    _inGame = true;
 }

@@ -10,7 +10,7 @@ class UserControl
 {
 	public:
 		UserControl();
-		virtual ~UserControl();
+		~UserControl();
 
 		int XPos, YPos, Width, Height, Offset;
 
@@ -22,7 +22,6 @@ class UserControl
 		virtual void OnClick(int, int, GUI*);
 		virtual void OnUnclick(int, int, GUI*);
 		virtual bool IsMovable();
-		virtual void Dispose();
 		virtual void OnKeyPressed(char);
 
 		bool hasFocus;

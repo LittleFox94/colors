@@ -11,11 +11,10 @@ class UC_Label : public UserControl
 		virtual ~UC_Label();
 
 		void Draw(sf::RenderTarget *);
-		void Dispose();
 	protected:
 	private:
-		sf::String _s;
-		sf::Font _font;
+		sf::String *_s;
+		sf::Font *_font;
 };
 
 #endif // UC_LABEL_H

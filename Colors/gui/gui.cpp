@@ -119,9 +119,28 @@ void GUI::HoverAtPos(int posX, int posY)
 {
 	if(IsMoving)
 		return;
-	struct GUI_ITEM *current = _lastGuiItem;
 
 	bool found = false;
+
+	if(FocusedItem != null)
+	{
+	    int x, y, w, h;
+		x = FocusedItem->control->XPos;
+		y = FocusedItem->control->YPos;
+		w = FocusedItem->control->Width;
+		h = FocusedItem->control->Height;
+
+		if(posX > x && posX < x + w && posY > y && posY < y + h && !found)
+		{
+			FocusedItem->control->OnHover(posX, posY, this);
+			found = true;
+		}
+
+		else
+			FocusedItem->control->OnUnhover(posX, posY, this);
+	}
+
+    struct GUI_ITEM *current = _lastGuiItem;
 
 	while(current != null)
 	{
@@ -148,9 +167,32 @@ void GUI::ClickAtPos(int posX, int posY)
 {
 	if(IsMoving)
 		return;
-	struct GUI_ITEM *current = _lastGuiItem;
 
 	bool found = false;
+
+	if(FocusedItem != null)
+	{
+	    int x, y, w, h;
+		x = FocusedItem->control->XPos;
+		y = FocusedItem->control->YPos;
+		w = FocusedItem->control->Width;
+		h = FocusedItem->control->Height;
+
+		if(posX > x && posX < x + w && posY > y && posY < y + h && !found)
+		{
+			FocusedItem->control->OnClick(posX, posY, this);
+			found = true;
+			FocusedItem->control->hasFocus = true;
+		}
+		else
+		{
+			FocusedItem->control->OnUnhover(posX, posY, this);
+			FocusedItem->control->hasFocus = false;
+		}
+
+	}
+
+    struct GUI_ITEM *current = _lastGuiItem;
 
 	while(current != null)
 	{
@@ -182,10 +224,29 @@ void GUI::UnclickAtPos(int posX, int posY)
 	if(IsMoving)
 		return;
 
-	struct GUI_ITEM *current = _lastGuiItem;
 	bool found = false;
 
-	while(current != null)
+	if(FocusedItem != null)
+	{
+	    int x, y, w, h;
+		x = FocusedItem->control->XPos;
+		y = FocusedItem->control->YPos;
+		w = FocusedItem->control->Width;
+		h = FocusedItem->control->Height;
+
+		if(posX > x && posX < x + w && posY > y && posY < y + h && !found)
+		{
+			FocusedItem->control->OnUnclick(posX, posY, this);
+			found = true;
+		}
+		else
+			FocusedItem->control->OnUnhover(posX, posY, this);
+
+	}
+
+	struct GUI_ITEM *current = _lastGuiItem;
+
+	while(current != null && current->control != null)
 	{
 		int x, y, w, h;
 		x = current->control->XPos;
@@ -201,12 +262,29 @@ void GUI::UnclickAtPos(int posX, int posY)
 		else
 			current->control->OnUnhover(posX, posY, this);
 
-		current = current->last;
+        current = current->last;
 	}
 }
 
 bool GUI::MoveControlAt(int posX, int posY, int oldX, int oldY)
 {
+    if(FocusedItem != null)
+	{
+	    int x, y, w, h;
+		x = FocusedItem->control->XPos;
+		y = FocusedItem->control->YPos;
+		w = FocusedItem->control->Width;
+		h = FocusedItem->control->Height;
+
+		if(posX > x && posX < x + w && posY > y && posY < y + h && FocusedItem->control->IsMovable())
+		{
+			IsMoving = true;
+			FocusedItem->control->XPos -= oldX - posX;
+			FocusedItem->control->YPos -= oldY - posY;
+			return true;
+		}
+	}
+
 	struct GUI_ITEM *current = _firstGuiItem;
 
 	while(current != null)
@@ -227,5 +305,6 @@ bool GUI::MoveControlAt(int posX, int posY, int oldX, int oldY)
 
 		current = current->next;
 	}
+
 	return false;
 }

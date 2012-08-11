@@ -47,6 +47,7 @@
 			<Add library="freetype" />
 			<Add directory="..\..\3rd-party\lib" />
 		</Linker>
+		<Unit filename="gamelogic.cpp" />
 		<Unit filename="gui\gui.cpp" />
 		<Unit filename="gui\uc_button.cpp" />
 		<Unit filename="gui\uc_checkbox.cpp" />
@@ -57,6 +58,7 @@
 		<Unit filename="gui\uc_progressbar.cpp" />
 		<Unit filename="gui\uc_window.cpp" />
 		<Unit filename="gui\usercontrol.cpp" />
+		<Unit filename="include\gamelogic.h" />
 		<Unit filename="include\gui\gui.h" />
 		<Unit filename="include\gui\uc_button.h" />
 		<Unit filename="include\gui\uc_checkbox.h" />

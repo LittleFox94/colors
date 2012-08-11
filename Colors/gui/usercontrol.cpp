@@ -7,7 +7,6 @@ UserControl::UserControl()
 
 UserControl::~UserControl()
 {
-	Dispose();
 }
 
 void UserControl::Draw(sf::RenderTarget *window) { }
@@ -18,5 +17,4 @@ void UserControl::OnUnclick(int, int, GUI*) { }
 bool UserControl::IsMovable() {
 	return false;
 }
-void UserControl::Dispose() { }
 void UserControl::OnKeyPressed(char) { }

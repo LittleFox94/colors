@@ -17,9 +17,6 @@ class UC_ProgressBar : public UserControl
 		int Max;
 	protected:
 	private:
-		unsigned int _aniState;
-		sf::Image _aniImg;
-		sf::Sprite _aniSprite;
 };
 
 #endif // UC_PROGRESSBAR_H
