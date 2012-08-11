@@ -45,7 +45,7 @@ void UC_LineEdit::Draw(sf::RenderTarget *window)
 	window->Draw(sf::Shape::Line(posX, posY + Height, posX + Width, posY + Height, 2, sf::Color(255, 255, 255)));
 	window->Draw(sf::Shape::Line(posX + Width, posY, posX + Width, posY + Height, 2, sf::Color(255, 255, 255)));
 
-	int maxChars = ((Width / (Height - 4)) * 2) - 1;
+	unsigned int maxChars = ((Width / (Height - 4)) * 2) - 1;
 
 	string temp;
 

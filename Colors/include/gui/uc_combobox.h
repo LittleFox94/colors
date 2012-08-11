@@ -1,7 +1,7 @@
 #ifndef UC_COMBOBOX_H
 #define UC_COMBOBOX_H
 
-#include "UserControl.h"
+#include "usercontrol.h"
 
 struct COMBOBOX_ITEM
 {

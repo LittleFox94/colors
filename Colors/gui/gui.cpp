@@ -66,7 +66,7 @@ void GUI::AddItem(UserControl *control)
 
     FocusedItem = null;
 
-	printf(string("[ GUI ] New UserControl added!\n").c_str());
+	cout << "[ GUI ] New UserControl added!" << endl;
 }
 
 void GUI::RemoveItem(UserControl *control)
@@ -112,7 +112,7 @@ void GUI::RemoveItem(UserControl *control)
 
     delete current;
 
-    printf(string("[ GUI ] UserControl removed!\n").c_str());
+    cout << "[ GUI ] UserControl removed!" << endl;
 }
 
 void GUI::HoverAtPos(int posX, int posY)

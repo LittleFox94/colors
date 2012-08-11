@@ -1,7 +1,7 @@
 #ifndef UC_CHECKBOX_H
 #define UC_CHECKBOX_H
 
-#include "UserControl.h"
+#include "usercontrol.h"
 #include "gui.h"
 
 class UC_CheckBox : public UserControl
