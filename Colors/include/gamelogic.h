@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
-#include "stdio.h"
+#include "main.h"
 
 static const unsigned char DefaultPalette[][3] =
 {

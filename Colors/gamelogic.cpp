@@ -14,21 +14,15 @@ GameLogic::GameLogic(int width, int height, int numColors)
     }
 
 	_pictureBuffer = new unsigned char[height * width * 4];
+	memset(_pictureBuffer, 255, height * width * 4);
 
     sf::Randomizer random;
 
     for(int y = 0; y < height; y++)
     {
-    	char *line = _field[y];
-
     	for(int x = 0; x < width; x++)
     	{
-    		line[x] = (char)random.Random(0, numColors - 1);
-
-    		_pictureBuffer[((y * width) + x) * 4    ] = DefaultPalette[(int)line[x]][0];
-    		_pictureBuffer[((y * width) + x) * 4 + 1] = DefaultPalette[(int)line[x]][1];
-    		_pictureBuffer[((y * width) + x) * 4 + 2] = DefaultPalette[(int)line[x]][2];
-    		_pictureBuffer[((y * width) + x) * 4 + 3] = 255;
+    		SetColor(x, y, random.Random(0, numColors - 1));
     	}
     }
 
@@ -63,9 +57,9 @@ void GameLogic::SetColor(int x, int y, char color)
 		return;
 	}
 
-	_pictureBuffer[((y * _width) + x) * 3    ] = DefaultPalette[(int)color][0];
-	_pictureBuffer[((y * _width) + x) * 3 + 1] = DefaultPalette[(int)color][1];
-	_pictureBuffer[((y * _width) + x) * 3 + 2] = DefaultPalette[(int)color][2];
+	_pictureBuffer[((y * _width) + x) * 4    ] = DefaultPalette[(int)color][0];
+	_pictureBuffer[((y * _width) + x) * 4 + 1] = DefaultPalette[(int)color][1];
+	_pictureBuffer[((y * _width) + x) * 4 + 2] = DefaultPalette[(int)color][2];
 
 	_field[y][x] = color;
 }
