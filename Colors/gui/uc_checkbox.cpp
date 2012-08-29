@@ -10,7 +10,7 @@ UC_CheckBox::UC_CheckBox(string label, int x, int y)
 	_caption = label;
 
 	_img = new sf::Image();
-	_img->LoadFromFile("data/img/checkbox.png");
+	_img->LoadFromFile("res/img/gui/checkbox.png");
 	_img->SetSmooth(true);
 
 	_sprite = new sf::Sprite();

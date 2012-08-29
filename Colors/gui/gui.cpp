@@ -63,6 +63,7 @@ void GUI::AddItem(UserControl *control)
 	}
 
 	control->Parent = _parentControl;
+	control->Gui = this;
 
     FocusedItem = null;
 

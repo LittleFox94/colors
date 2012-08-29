@@ -16,6 +16,8 @@ class UserControl
 
 		UserControl *Parent; // Nur lesen! Änderungen werden ignoriert, können aber Fehler verursachen!
 
+		GUI *Gui;
+
 		virtual void Draw(sf::RenderTarget *);
 		virtual void OnHover(int, int, GUI*);
 		virtual void OnUnhover(int, int, GUI*);

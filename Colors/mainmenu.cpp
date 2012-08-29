@@ -68,6 +68,13 @@ void MainMenu::DoEvents(sf::RenderWindow *window, sf::Event event)
 
         if(_inGame)
         {
+            _logic->GetGui()->HoverAtPos(_mouseX, _mouseY);
+
+            if(_mouseLeftDown)
+            {
+                if(!_logic->GetGui()->MoveControlAt(mouseX, mouseY, _mouseX, _mouseY) || (_mouseX == mouseX && _mouseY == mouseY))
+                    _logic->GetGui()->IsMoving = false;
+            }
         }
         else
         {
@@ -88,6 +95,11 @@ void MainMenu::DoEvents(sf::RenderWindow *window, sf::Event event)
     case sf::Event::MouseButtonPressed:
         if(_inGame)
         {
+            if(window->GetInput().IsMouseButtonDown(sf::Mouse::Left))
+            {
+                _logic->GetGui()->ClickAtPos(_mouseX, _mouseY);
+                _mouseLeftDown = true;
+            }
         }
         else
         {
@@ -102,6 +114,12 @@ void MainMenu::DoEvents(sf::RenderWindow *window, sf::Event event)
     case sf::Event::MouseButtonReleased:
         if(_inGame)
         {
+            if(_mouseLeftDown)
+            {
+                _logic->GetGui()->UnclickAtPos(_mouseX, _mouseY);
+                _mouseLeftDown = false;
+                _logic->GetGui()->IsMoving = false;
+            }
         }
         else
         {
@@ -117,6 +135,8 @@ void MainMenu::DoEvents(sf::RenderWindow *window, sf::Event event)
     case sf::Event::KeyPressed:
         if(_inGame)
         {
+            if(_logic->GetGui()->FocusedItem != null)
+                _logic->GetGui()->FocusedItem->control->OnKeyPressed(event.Text.Unicode);
         }
         else
         {
@@ -178,6 +198,6 @@ void MainMenu::NewGameStartHandler()
 {
     _closeNewGameForm = true;
 
-    _logic = new GameLogic(_newGameWindow->GetFieldWidth(), _newGameWindow->GetFieldHeight(), _newGameWindow->GetNumColors());
+    _logic = new GameLogic(_newGameWindow->GetFieldWidth(), _newGameWindow->GetFieldHeight(), _newGameWindow->GetNumColors(), _newGameWindow->GetAllowRegions());
     _inGame = true;
 }

@@ -4,9 +4,11 @@
 int main(int argc, char *argv[])
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Colors"/*, sf::Style::Fullscreen*/);
+    window.SetFramerateLimit(60);
 
     sf::Image *background = new sf::Image();
     background->LoadFromFile("res/img/background.png");
+    background->SetSmooth(false);
     sf::Sprite *backgroundSprite = new sf::Sprite();
     backgroundSprite->SetImage(*background);
 

@@ -46,6 +46,9 @@ NewGameForm::NewGameForm(void *cancelHandler, void *startHandler)
     _fieldSize->SetCurrentIndex(2);
     Gui()->AddItem(_fieldSize);
 
+    _allowRegions = new UC_CheckBox("Zusammenhängende Regionen erlauben", 5, 112);
+    Gui()->AddItem(_allowRegions);
+
     _createGameButton = new UC_Button("res/img/gui/button.png", "Spiel starten", 400 - 125, 280 - 30, startHandler);
     Gui()->AddItem(_createGameButton);
 
@@ -109,4 +112,9 @@ int NewGameForm::GetFieldHeight()
 int NewGameForm::GetNumColors()
 {
 	return _numColors->CurrentIndex + 4;
+}
+
+bool NewGameForm::GetAllowRegions()
+{
+    return _allowRegions->Checked;
 }

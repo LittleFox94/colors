@@ -37,6 +37,7 @@ class GUI
 
 		bool IsMoving;
 		bool hasChanged;
+		void *Parameter;
 
 		const GUI_ITEM_T *FocusedItem;
 	protected:

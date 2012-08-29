@@ -9,8 +9,10 @@ class UC_Button : public UserControl
 	public:
 		void *callback;
 		void *callbackParam;
+		void *secondCallbackParam;
 
 		UC_Button();
+		UC_Button(sf::Color color, int x, int y, void *cb = null);
 		UC_Button(string imgFileName, int, int, void *cb = null);
 		UC_Button(string imgFileName, string caption, int, int, void *cb = null);
 		UC_Button(string imgFileName, int, int, void *cb, void *param);

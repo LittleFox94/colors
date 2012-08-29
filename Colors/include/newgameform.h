@@ -12,12 +12,15 @@ class NewGameForm : public UC_Window
         int GetFieldWidth();
         int GetFieldHeight();
         int GetNumColors();
+        bool GetAllowRegions();
     protected:
     private:
 
         UC_ComboBox *_numPlayers;
         UC_ComboBox *_numColors;
         UC_ComboBox *_fieldSize;
+
+        UC_CheckBox *_allowRegions;
 
         UC_Label *_titleLabel;
         UC_Label *_numPlayersLabel;
