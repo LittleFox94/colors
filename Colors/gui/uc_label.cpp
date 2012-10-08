@@ -37,3 +37,13 @@ void UC_Label::Draw(sf::RenderTarget *window)
 	_s->SetPosition(posX, posY);
 	window->Draw(*_s);
 }
+
+void UC_Label::SetText(string text)
+{
+    _s->SetText(text);
+}
+
+void UC_Label::SetColor(sf::Color color)
+{
+    _s->SetColor(color);
+}

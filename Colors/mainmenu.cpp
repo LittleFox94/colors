@@ -6,6 +6,7 @@ bool MainMenu::_mouseLeftDown;
 bool MainMenu::_inGame;
 bool MainMenu::_running;
 bool MainMenu::_closeNewGameForm;
+bool MainMenu::_endGame;
 GUI *MainMenu::_mainMenu;
 NewGameForm *MainMenu::_newGameWindow;
 GameLogic *MainMenu::_logic;
@@ -19,6 +20,7 @@ void MainMenu::Initialize(sf::RenderWindow *window)
     _running = true;
     _mouseLeftDown = false;
     _logic = null;
+    _endGame = false;
 
     _fps = new sf::String();
     _fps->SetFont(sf::Font::GetDefaultFont());
@@ -155,6 +157,13 @@ void MainMenu::DoEvents(sf::RenderWindow *window, sf::Event event)
 		_newGameWindow = null;
 		_closeNewGameForm = false;
     }
+
+    if(_endGame)
+    {
+        _inGame = false;
+        delete _logic;
+        _endGame = false;
+    }
 }
 
 void MainMenu::Draw(sf::RenderWindow *target)
@@ -173,6 +182,11 @@ void MainMenu::Draw(sf::RenderWindow *target)
     sprintf(fpsLabel, "%d FPS", (int)fps);
     _fps->SetText(fpsLabel);
     target->Draw(*_fps);
+}
+
+void MainMenu::EndGame()
+{
+    _endGame = true;
 }
 
 void MainMenu::ExitButtonClickHandler()
@@ -198,6 +212,6 @@ void MainMenu::NewGameStartHandler()
 {
     _closeNewGameForm = true;
 
-    _logic = new GameLogic(_newGameWindow->GetFieldWidth(), _newGameWindow->GetFieldHeight(), _newGameWindow->GetNumColors(), _newGameWindow->GetAllowRegions());
+    _logic = new GameLogic(2, _newGameWindow->GetFieldWidth(), _newGameWindow->GetFieldHeight(), _newGameWindow->GetNumColors(), _newGameWindow->GetAllowRegions(), false);
     _inGame = true;
 }

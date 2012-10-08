@@ -37,6 +37,7 @@ NewGameForm::NewGameForm(void *cancelHandler, void *startHandler)
     Gui()->AddItem(_fieldSizeLabel);
 
     _fieldSize = new UC_ComboBox(140, 80, 120);
+    _fieldSize->AddItem("5x5");
     _fieldSize->AddItem("10x10");
     _fieldSize->AddItem("20x20");
     _fieldSize->AddItem("30x30");
@@ -71,17 +72,19 @@ int NewGameForm::GetFieldWidth()
 {
 	switch(_fieldSize->CurrentIndex)
 	{
-		case 0:
-			return 10;
+	    case 0:
+            return 5;
 		case 1:
-			return 20;
+			return 10;
 		case 2:
-			return 30;
+			return 20;
 		case 3:
-			return 50;
+			return 30;
 		case 4:
-			return 100;
+			return 50;
 		case 5:
+			return 100;
+		case 6:
 			return 200;
 	}
 
@@ -93,16 +96,18 @@ int NewGameForm::GetFieldHeight()
 	switch(_fieldSize->CurrentIndex)
 	{
 		case 0:
-			return 10;
+            return 5;
 		case 1:
-			return 20;
+			return 10;
 		case 2:
-			return 30;
+			return 20;
 		case 3:
-			return 50;
+			return 30;
 		case 4:
-			return 100;
+			return 50;
 		case 5:
+			return 100;
+		case 6:
 			return 200;
 	}
 

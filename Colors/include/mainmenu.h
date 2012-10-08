@@ -7,6 +7,8 @@
 #include "newgameform.h"
 #include "gamelogic.h"
 
+class GameLogic;
+
 class MainMenu
 {
     public:
@@ -14,6 +16,8 @@ class MainMenu
         static void DoEvents(sf::RenderWindow *window, sf::Event event);
         static void Draw(sf::RenderWindow *target);
         static bool Running();
+
+        static void EndGame();
 
     private:
         static void BuildMainMenu(int width, int height);
@@ -31,6 +35,7 @@ class MainMenu
         static bool _inGame;
         static bool _running;
         static bool _closeNewGameForm;
+        static bool _endGame;
 
         static GUI *_mainMenu;
         static NewGameForm *_newGameWindow;

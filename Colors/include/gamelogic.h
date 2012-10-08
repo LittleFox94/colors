@@ -6,6 +6,7 @@
 #include "main.h"
 #include "resizableimage.h"
 #include "gui/gui.h"
+#include "mainmenu.h"
 
 static const unsigned char DefaultPalette[][3] =
 {
@@ -30,14 +31,14 @@ static const unsigned char DefaultPalette[][3] =
 class GameLogic
 {
     public:
-        GameLogic(int width, int height, int numColors, bool allowRegions);
+        GameLogic(int numPlayers, int width, int height, int numColors, bool allowRegions, bool ai=true);
         virtual ~GameLogic();
 
-        char GetColor(int x, int y);
-        void SetColor(int x, int y, char color);
+        char GetColor(int x, int y, char **field);
+        void SetColor(int x, int y, char color, char **field);
         void Render(sf::RenderWindow *window);
         void Fill(char color);
-        void Fill(char color, int x, int y);
+        int Fill(char color, int x, int y, char **field);
 
         static void ButtonClick(void *param1, void *param2);
 
@@ -53,6 +54,9 @@ class GameLogic
 
         int _currentPlayer;
         int _numPlayers;
+        int _numColors;
+
+        int *_points;
 
         sf::Image *_image;
         sf::Sprite *_sprite;
@@ -62,7 +66,17 @@ class GameLogic
 
         GUI *_gui;
 
+        UC_Label **_pointLabels;
+
+        bool _gameFinished;
+        int _winner;
+
+        bool _ai;
+
         void GetPlayerPosition(int player, int *x, int *y);
+        void DoAI();
+        int Count(char color, int x, int y);
+        bool ColorUsable(char color);
 };
 
 #endif // GAMELOGIC_H

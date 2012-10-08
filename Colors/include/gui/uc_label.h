@@ -11,6 +11,8 @@ class UC_Label : public UserControl
 		virtual ~UC_Label();
 
 		void Draw(sf::RenderTarget *);
+		void SetText(string text);
+		void SetColor(sf::Color color);
 	protected:
 	private:
 		sf::String *_s;
