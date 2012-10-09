@@ -72,6 +72,7 @@ class GameLogic
         int _winner;
 
         bool _ai;
+        bool _doingAI;
 
         void GetPlayerPosition(int player, int *x, int *y);
         void DoAI();

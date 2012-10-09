@@ -7,6 +7,7 @@ GameLogic::GameLogic(int numPlayers, int width, int height, int numColors, bool 
     _points = new int[_numPlayers];
     _pointLabels = new UC_Label*[_numPlayers];
     _ai = ai;
+    _doingAI = false;
     _numColors = numColors;
 
     _width = width;
@@ -213,11 +214,17 @@ void GameLogic::Fill(char color)
 
         if(_currentPlayer == _numPlayers - (_ai ? 1 : 0))
         {
-            if(_ai)
+            if(_ai && !_doingAI)
             {
+                _doingAI = true;
                 DoAI();
+                _doingAI = false;
             }
 
+            _currentPlayer = 0;
+        }
+        else if(_ai && _currentPlayer == _numPlayers)
+        {
             _currentPlayer = 0;
         }
 
@@ -308,9 +315,8 @@ int GameLogic::Count(char color, int x, int y)
     for(int i = 0; i < _height; i++)
     {
         field[i] = new char[_width];
+        memcpy(field[i], _field[i], _width);
     }
-
-    memcpy(field, _field, _width * _height);
 
     Fill(color, x, y, field);
     int points = Fill(-2, x, y, field);

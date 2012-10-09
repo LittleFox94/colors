@@ -212,6 +212,6 @@ void MainMenu::NewGameStartHandler()
 {
     _closeNewGameForm = true;
 
-    _logic = new GameLogic(2, _newGameWindow->GetFieldWidth(), _newGameWindow->GetFieldHeight(), _newGameWindow->GetNumColors(), _newGameWindow->GetAllowRegions(), false);
+    _logic = new GameLogic(1, _newGameWindow->GetFieldWidth(), _newGameWindow->GetFieldHeight(), _newGameWindow->GetNumColors(), _newGameWindow->GetAllowRegions(), true);
     _inGame = true;
 }
