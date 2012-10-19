@@ -43,12 +43,15 @@ NewGameForm::NewGameForm(void *cancelHandler, void *startHandler)
     _fieldSize->AddItem("30x30");
     _fieldSize->AddItem("50x50");
     _fieldSize->AddItem("100x100");
-    //_fieldSize->AddItem("200x200");
-    _fieldSize->SetCurrentIndex(2);
+    _fieldSize->AddItem("200x200");
+    _fieldSize->SetCurrentIndex(3);
     Gui()->AddItem(_fieldSize);
 
     _allowRegions = new UC_CheckBox("Zusammenhängende Regionen erlauben", 5, 112);
     Gui()->AddItem(_allowRegions);
+
+    _diagonalFill = new UC_CheckBox("Diagonal füllen (nicht empfohlen)", 5, 132);
+    Gui()->AddItem(_diagonalFill);
 
     _createGameButton = new UC_Button("res/img/gui/button.png", "Spiel starten", 400 - 125, 280 - 30, startHandler);
     Gui()->AddItem(_createGameButton);
@@ -122,4 +125,9 @@ int NewGameForm::GetNumColors()
 bool NewGameForm::GetAllowRegions()
 {
     return _allowRegions->Checked;
+}
+
+bool NewGameForm::GetDiagonalFill()
+{
+    return _diagonalFill->Checked;
 }

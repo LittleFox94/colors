@@ -13,6 +13,7 @@ class NewGameForm : public UC_Window
         int GetFieldHeight();
         int GetNumColors();
         bool GetAllowRegions();
+        bool GetDiagonalFill();
     protected:
     private:
 
@@ -21,6 +22,7 @@ class NewGameForm : public UC_Window
         UC_ComboBox *_fieldSize;
 
         UC_CheckBox *_allowRegions;
+        UC_CheckBox *_diagonalFill;
 
         UC_Label *_titleLabel;
         UC_Label *_numPlayersLabel;

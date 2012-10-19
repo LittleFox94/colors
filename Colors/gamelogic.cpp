@@ -1,6 +1,6 @@
 #include "include/gamelogic.h"
 
-GameLogic::GameLogic(int numPlayers, int width, int height, int numColors, bool allowRegions, bool ai)
+GameLogic::GameLogic(int numPlayers, int width, int height, int numColors, bool allowRegions, bool diagonalFill, bool ai)
 {
     _currentPlayer = 0;
     _numPlayers = numPlayers + (ai ? 1 : 0);
@@ -9,6 +9,7 @@ GameLogic::GameLogic(int numPlayers, int width, int height, int numColors, bool 
     _ai = ai;
     _doingAI = false;
     _numColors = numColors;
+    _diagonalFill = diagonalFill;
 
     _width = width;
     _height = height;
@@ -289,6 +290,21 @@ int GameLogic::Fill(char color, int x, int y, char **field)
 
     if(GetColor(x, y - 1, field) == oldColor)
         points += Fill(color, x, y - 1, field);
+
+    if(_diagonalFill)
+    {
+        if(GetColor(x - 1, y - 1, field) == oldColor)
+            points += Fill(color, x - 1, y - 1, field);
+
+        if(GetColor(x - 1, y + 1, field) == oldColor)
+            points += Fill(color, x - 1, y + 1, field);
+
+        if(GetColor(x + 1, y - 1, field) == oldColor)
+            points += Fill(color, x + 1, y - 1, field);
+
+        if(GetColor(x + 1, y + 1, field) == oldColor)
+            points += Fill(color, x + 1, y + 1, field);
+    }
 
     return points;
 }

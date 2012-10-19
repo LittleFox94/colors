@@ -31,7 +31,7 @@ static const unsigned char DefaultPalette[][3] =
 class GameLogic
 {
     public:
-        GameLogic(int numPlayers, int width, int height, int numColors, bool allowRegions, bool ai=true);
+        GameLogic(int numPlayers, int width, int height, int numColors, bool allowRegions, bool diagonalFill, bool ai=true);
         virtual ~GameLogic();
 
         char GetColor(int x, int y, char **field);
@@ -73,6 +73,7 @@ class GameLogic
 
         bool _ai;
         bool _doingAI;
+        bool _diagonalFill;
 
         void GetPlayerPosition(int player, int *x, int *y);
         void DoAI();
