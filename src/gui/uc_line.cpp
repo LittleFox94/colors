@@ -1,4 +1,4 @@
-#include "../include/gui/uc_line.h"
+#include "../../include/gui/uc_line.h"
 
 UC_Line::UC_Line(int x, int y, int l, bool vertical)
 {

@@ -1,4 +1,4 @@
-#include "../include/gui/uc_progressbar.h"
+#include "../../include/gui/uc_progressbar.h"
 
 UC_ProgressBar::UC_ProgressBar(int min, int max, int x, int y, int w, int h)
 {

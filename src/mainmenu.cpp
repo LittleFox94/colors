@@ -1,4 +1,4 @@
-#include "include/mainmenu.h"
+#include "../include/mainmenu.h"
 
 int MainMenu::_mouseX;
 int MainMenu::_mouseY;

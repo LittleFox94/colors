@@ -1,4 +1,4 @@
-#include "include/newgameform.h"
+#include "../include/newgameform.h"
 
 NewGameForm::NewGameForm(void *cancelHandler, void *startHandler)
 {

@@ -1,4 +1,4 @@
-#include "include/gamelogic.h"
+#include "../include/gamelogic.h"
 
 GameLogic::GameLogic(int numPlayers, int width, int height, int numColors, bool allowRegions, bool diagonalFill, bool ai)
 {

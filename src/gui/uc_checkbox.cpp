@@ -1,4 +1,4 @@
-#include "../include/gui/uc_checkbox.h"
+#include "../../include/gui/uc_checkbox.h"
 
 UC_CheckBox::UC_CheckBox(string label, int x, int y)
 {

@@ -1,4 +1,4 @@
-#include "../include/gui/uc_lineedit.h"
+#include "../../include/gui/uc_lineedit.h"
 
 UC_LineEdit::UC_LineEdit(int x, int y, int w, int h)
 {

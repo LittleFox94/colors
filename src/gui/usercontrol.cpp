@@ -1,4 +1,4 @@
-#include "../include/gui/usercontrol.h"
+#include "../../include/gui/usercontrol.h"
 
 UserControl::UserControl()
 {

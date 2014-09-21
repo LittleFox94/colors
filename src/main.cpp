@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "include/mainmenu.h"
+#include "../include/mainmenu.h"
 
 int main(int argc, char *argv[])
 {

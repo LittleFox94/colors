@@ -1,4 +1,4 @@
-#include "../include/gui/uc_label.h"
+#include "../../include/gui/uc_label.h"
 
 UC_Label::UC_Label(string text, sf::Color color, int size, int x, int y)
 {

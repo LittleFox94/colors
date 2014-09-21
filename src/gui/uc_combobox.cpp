@@ -1,4 +1,4 @@
-#include "../include/gui/uc_combobox.h"
+#include "../../include/gui/uc_combobox.h"
 
 UC_ComboBox::UC_ComboBox(int x, int y, int w)
 {

@@ -1,4 +1,4 @@
-#include "../include/gui/gui.h"
+#include "../../include/gui/gui.h"
 
 GUI::GUI(UserControl *parent)
 {

@@ -1,5 +1,5 @@
-#include "../include/gui/uc_window.h"
-#include "../include/gui/gui.h"
+#include "../../include/gui/uc_window.h"
+#include "../../include/gui/gui.h"
 
 UC_Window::UC_Window()
 {

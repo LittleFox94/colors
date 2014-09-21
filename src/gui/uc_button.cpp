@@ -1,5 +1,5 @@
-#include "../include/gui/uc_button.h"
-#include "../include/gui/gui.h"
+#include "../../include/gui/uc_button.h"
+#include "../../include/gui/gui.h"
 
 UC_Button::UC_Button()
 {
