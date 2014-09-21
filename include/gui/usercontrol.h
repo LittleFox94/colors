@@ -10,7 +10,7 @@ class UserControl
 {
 	public:
 		UserControl();
-		~UserControl();
+		virtual ~UserControl();
 
 		int XPos, YPos, Width, Height, Offset;
 
