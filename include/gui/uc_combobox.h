@@ -31,7 +31,8 @@ class UC_ComboBox : public UserControl
 		int _scrollOffset;
 		int _hoveredItem;
 
-		sf::Image *_buttonImg;
+		sf::Font *_font;
+		sf::Texture *_buttonImg;
 		sf::Sprite *_buttonSprite;
 		bool _isOpened;
 		struct COMBOBOX_ITEM *_firstItem;

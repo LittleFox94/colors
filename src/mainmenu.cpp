@@ -10,7 +10,6 @@ bool MainMenu::_endGame;
 GUI *MainMenu::_mainMenu;
 NewGameForm *MainMenu::_newGameWindow;
 GameLogic *MainMenu::_logic;
-sf::String *MainMenu::_fps;
 
 void MainMenu::Initialize(sf::RenderWindow *window)
 {
@@ -22,13 +21,8 @@ void MainMenu::Initialize(sf::RenderWindow *window)
     _logic = null;
     _endGame = false;
 
-    _fps = new sf::String();
-    _fps->SetFont(sf::Font::GetDefaultFont());
-    _fps->SetSize(12);
-    _fps->SetPosition(0, 0);
-    _fps->SetColor(sf::Color(0, 0, 0));
-
-    BuildMainMenu(window->GetWidth(), window->GetHeight());
+    sf::Vector2u windowSize = window->getSize();
+    BuildMainMenu(windowSize.x, windowSize.y);
 }
 
 void MainMenu::BuildMainMenu(int width, int height)
@@ -61,12 +55,14 @@ bool MainMenu::Running()
 
 void MainMenu::DoEvents(sf::RenderWindow *window, sf::Event event)
 {
-    switch(event.Type)
+    sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
+
+    switch(event.type)
     {
     case sf::Event::MouseMoved:
     {
-        int mouseX = window->GetInput().GetMouseX();
-        int mouseY = window->GetInput().GetMouseY();
+        int mouseX = mousePos.x;
+        int mouseY = mousePos.y;
 
         if(_inGame)
         {
@@ -97,7 +93,7 @@ void MainMenu::DoEvents(sf::RenderWindow *window, sf::Event event)
     case sf::Event::MouseButtonPressed:
         if(_inGame)
         {
-            if(window->GetInput().IsMouseButtonDown(sf::Mouse::Left))
+            if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
                 _logic->GetGui()->ClickAtPos(_mouseX, _mouseY);
                 _mouseLeftDown = true;
@@ -105,7 +101,7 @@ void MainMenu::DoEvents(sf::RenderWindow *window, sf::Event event)
         }
         else
         {
-            if(window->GetInput().IsMouseButtonDown(sf::Mouse::Left))
+            if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
                 _mainMenu->ClickAtPos(_mouseX, _mouseY);
                 _mouseLeftDown = true;
@@ -138,12 +134,12 @@ void MainMenu::DoEvents(sf::RenderWindow *window, sf::Event event)
         if(_inGame)
         {
             if(_logic->GetGui()->FocusedItem != null)
-                _logic->GetGui()->FocusedItem->control->OnKeyPressed(event.Text.Unicode);
+                _logic->GetGui()->FocusedItem->control->OnKeyPressed(event.text.unicode);
         }
         else
         {
             if(_mainMenu->FocusedItem != null)
-                _mainMenu->FocusedItem->control->OnKeyPressed(event.Text.Unicode);
+                _mainMenu->FocusedItem->control->OnKeyPressed(event.text.unicode);
         }
         break;
     default:
@@ -176,12 +172,6 @@ void MainMenu::Draw(sf::RenderWindow *target)
     {
         _mainMenu->DrawItems(target);
     }
-
-    float fps = 1.0 / target->GetFrameTime();
-    char fpsLabel[50];
-    sprintf(fpsLabel, "%d FPS", (int)fps);
-    _fps->SetText(fpsLabel);
-    target->Draw(*_fps);
 }
 
 void MainMenu::EndGame()

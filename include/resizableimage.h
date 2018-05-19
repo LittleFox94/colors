@@ -12,7 +12,7 @@ class ResizableImage
         void Draw(sf::RenderTarget *target, int x, int y);
     protected:
     private:
-        sf::Image *_image;
+        sf::Texture *_image;
         sf::Sprite *_sprite;
 };
 

@@ -58,7 +58,7 @@ class GameLogic
 
         int *_points;
 
-        sf::Image *_image;
+        sf::Texture *_image;
         sf::Sprite *_sprite;
         sf::Clock *_clock;
 

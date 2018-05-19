@@ -7,12 +7,15 @@ UC_ComboBox::UC_ComboBox(int x, int y, int w)
     Width = w;
     Height = 20;
 
-	_buttonImg = new sf::Image();
-    _buttonImg->LoadFromFile("res/img/gui/combobox.png");
+	_font = new sf::Font();
+	_font->loadFromFile("res/fonts/kaliberr.ttf");
+
+	_buttonImg = new sf::Texture();
+    _buttonImg->loadFromFile("res/img/gui/combobox.png");
 
     _buttonSprite = new sf::Sprite();
-    _buttonSprite->SetImage(*_buttonImg);
-    _buttonSprite->SetSubRect(sf::IntRect(0, 0, _buttonImg->GetWidth(), _buttonImg->GetHeight() / 3));
+    _buttonSprite->setTexture(*_buttonImg);
+    _buttonSprite->setTextureRect(sf::IntRect(0, 0, _buttonImg->getSize().x, _buttonImg->getSize().y / 3));
 
     _isOpened = false;
 
@@ -54,32 +57,43 @@ void UC_ComboBox::Draw(sf::RenderTarget *window)
         posY += Parent->YPos + Parent->Offset;
     }
 
-    window->Draw(sf::Shape::Line(posX, posY + 10, posX + Width, posY + 10, 20, sf::Color(240, 240, 240)));
+//    window->draw(sf::Shape::Line(posX, posY + 10, posX + Width, posY + 10, 20, sf::Color(240, 240, 240)));
 
-    _buttonSprite->SetPosition(posX + Width - 15, posY);
-    window->Draw(*_buttonSprite);
+    _buttonSprite->setPosition(posX + Width - 15, posY);
+    window->draw(*_buttonSprite);
 
     if(_currentItem != null)
     {
-        sf::String mainCaption;
-        mainCaption.SetText(_currentItem->caption);
-        mainCaption.SetSize(12);
-        mainCaption.SetColor(sf::Color(0, 0, 0));
-        mainCaption.SetPosition(posX + 2, posY + 2);
-        mainCaption.SetFont(sf::Font::GetDefaultFont());
-        window->Draw(mainCaption);
+        sf::Text mainCaption;
+        mainCaption.setFont(*_font);
+        mainCaption.setString(_currentItem->caption);
+        mainCaption.setCharacterSize(12);
+        mainCaption.setFillColor(sf::Color(0, 0, 0));
+        mainCaption.setPosition(posX + 2, posY + 2);
+        window->draw(mainCaption);
     }
 
     if(_isOpened)
     {
         int count = _lastItem->id + 1;
 
-        window->Draw(sf::Shape::Line(posX, posY + 20 + ((count * 20) / 2), posX + Width, posY + 20 + ((count * 20) / 2), count * 20, sf::Color(240, 240, 240), 1, sf::Color(0, 0, 0)));
+        sf::RectangleShape bg;
+        bg.setSize(sf::Vector2f(Width, count * 20));
+        bg.setPosition(posX, posY + 20);
+        bg.setFillColor(sf::Color(240, 240, 240));
+        bg.setOutlineThickness(1);
+        bg.setOutlineColor(sf::Color(0, 0, 0));
+        window->draw(bg);
 
-        if(_hoveredItem < count)
-            window->Draw(sf::Shape::Line(posX, posY + 30 + ((_hoveredItem) * 20), posX + Width, posY + 30 + ((_hoveredItem) * 20), 20, sf::Color(70, 100, 220)));
+        if(_hoveredItem < count) {
+            sf::RectangleShape highlight;
+            highlight.setSize(sf::Vector2f(Width, 20));
+            highlight.setPosition(posX, posY + 20 + (_hoveredItem * 20));
+            highlight.setFillColor(sf::Color(70, 100, 220));
+            window->draw(highlight);
+        }
 
-        sf::String captions[count];
+        sf::Text captions[count];
 
         struct COMBOBOX_ITEM *current = _firstItem;
         for(int i = 0; i < count; i++)
@@ -87,17 +101,17 @@ void UC_ComboBox::Draw(sf::RenderTarget *window)
             if(current == null)
                 break;
 
-            captions[i].SetText(current->caption);
-            captions[i].SetSize(12);
+            captions[i].setFont(*_font);
+            captions[i].setString(current->caption);
+            captions[i].setCharacterSize(12);
 
             if(i == _hoveredItem)
-                captions[i].SetColor(sf::Color(240, 240, 240));
+                captions[i].setFillColor(sf::Color(240, 240, 240));
             else
-                captions[i].SetColor(sf::Color(0, 0, 0));
+                captions[i].setFillColor(sf::Color(0, 0, 0));
 
-            captions[i].SetPosition(posX + 2, posY + 22 + (i * 20));
-            captions[i].SetFont(sf::Font::GetDefaultFont());
-            window->Draw(captions[i]);
+            captions[i].setPosition(posX + 2, posY + 22 + (i * 20));
+            window->draw(captions[i]);
 
             current = current->next;
         }
@@ -127,7 +141,7 @@ void UC_ComboBox::AddItem(string caption)
 
 void UC_ComboBox::OnHover(int x, int y, GUI*)
 {
-    _buttonSprite->SetSubRect(sf::IntRect(0, _buttonImg->GetHeight() / 3, _buttonImg->GetWidth(), (_buttonImg->GetHeight() / 3) * 2));
+    _buttonSprite->setTextureRect(sf::IntRect(0, _buttonImg->getSize().y / 3, _buttonImg->getSize().x, _buttonImg->getSize().y / 3));
 
     if(y - YPos - 20> 0)
     {
@@ -137,12 +151,12 @@ void UC_ComboBox::OnHover(int x, int y, GUI*)
 
 void UC_ComboBox::OnUnhover(int, int, GUI*)
 {
-    _buttonSprite->SetSubRect(sf::IntRect(0, 0, _buttonImg->GetWidth(), _buttonImg->GetHeight() / 3));
+    _buttonSprite->setTextureRect(sf::IntRect(0, 0, _buttonImg->getSize().x, _buttonImg->getSize().y / 3));
 }
 
 void UC_ComboBox::OnClick(int x, int y, GUI*)
 {
-    _buttonSprite->SetSubRect(sf::IntRect(0, (_buttonImg->GetHeight() / 3) * 2, _buttonImg->GetWidth(), (_buttonImg->GetHeight() / 3) * 3));
+    _buttonSprite->setTextureRect(sf::IntRect(0, (_buttonImg->getSize().y / 3) * 2, _buttonImg->getSize().x, _buttonImg->getSize().y / 3));
 
     if(y - YPos - 20 > 0)
     {
@@ -167,7 +181,7 @@ void UC_ComboBox::OnClick(int x, int y, GUI*)
 
 void UC_ComboBox::OnUnclick(int, int, GUI* gui)
 {
-    _buttonSprite->SetSubRect(sf::IntRect(0, _buttonImg->GetHeight() / 3, _buttonImg->GetWidth(), (_buttonImg->GetHeight() / 3) * 2));
+    _buttonSprite->setTextureRect(sf::IntRect(0, _buttonImg->getSize().y / 3, _buttonImg->getSize().x, _buttonImg->getSize().y / 3));
     _isOpened = !_isOpened;
 
     if(_isOpened)

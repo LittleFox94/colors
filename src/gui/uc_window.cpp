@@ -12,6 +12,18 @@ UC_Window::UC_Window()
 	Offset = 20;
 
 	_gui = new GUI(this);
+
+    _titleBar = new sf::RectangleShape();
+    _titleBar->setPosition(XPos, YPos);
+    _titleBar->setSize(sf::Vector2f(Width, 18));
+    _titleBar->setFillColor(sf::Color(0, 112, 201, 127));
+
+    _contentArea = new sf::RectangleShape();
+    _contentArea->setPosition(XPos, YPos);
+    _contentArea->setSize(sf::Vector2f(Width, Height - 18));
+    _contentArea->setFillColor(sf::Color(220, 220, 220, 240));
+    _contentArea->setOutlineThickness(2);
+    _contentArea->setOutlineColor(sf::Color(0, 112, 201, 127));
 }
 
 UC_Window::~UC_Window()
@@ -23,28 +35,24 @@ GUI *UC_Window::Gui()
     return _gui;
 }
 
-void UC_Window::Draw(sf::RenderTarget *SF_Window)
+void UC_Window::Draw(sf::RenderTarget *window)
 {
-	SF_Window->Draw(sf::Shape::Line(XPos, YPos + 10, XPos + Width, YPos + 10, 20, sf::Color(0, 112, 201, 127)));
+    _titleBar->setPosition(XPos, YPos);
+    _titleBar->setSize(sf::Vector2f(Width, 18));
+    _contentArea->setPosition(XPos, YPos+20);
+    _contentArea->setSize(sf::Vector2f(Width, Height - 18));
 
-	SF_Window->Draw(sf::Shape::Line(XPos, YPos + 10 + (Height / 2), XPos + Width, YPos + 10 + (Height / 2), Height - 20, sf::Color(220, 220, 220, 240)));
+    window->draw(*_titleBar);
+    window->draw(*_contentArea);
 
-	SF_Window->Draw(sf::Shape::Line(XPos, YPos, XPos, YPos + Height, 2, sf::Color(240, 240, 240)));
-	SF_Window->Draw(sf::Shape::Line(XPos, YPos, XPos + Width, YPos, 2, sf::Color(240, 240, 240)));
+	_gui->DrawItems(window);
 
-	SF_Window->Draw(sf::Shape::Line(XPos + Width, YPos, XPos + Width, YPos + Height, 2, sf::Color(180, 180, 180)));
-	SF_Window->Draw(sf::Shape::Line(XPos + Width, YPos + Height, XPos, YPos + Height, 2, sf::Color(180, 180, 180)));
-
-	_gui->DrawItems(SF_Window);
-
-	sf::String title;
-	title.SetColor(sf::Color(255, 255, 255));
-	title.SetFont(sf::Font::GetDefaultFont());
-	title.SetText(Title);
-	title.SetPosition(XPos + 5, YPos + 2);
-	title.SetSize(12);
-	title.SetBlendMode(sf::Blend::Add);
-	SF_Window->Draw(title);
+	sf::Text title;
+	title.setFillColor(sf::Color(255, 255, 255));
+	title.setString(Title);
+	title.setPosition(XPos + 5, YPos + 2);
+	title.setCharacterSize(12);
+	window->draw(title);
 }
 
 void UC_Window::OnHover(int posX, int posY, GUI *gui)

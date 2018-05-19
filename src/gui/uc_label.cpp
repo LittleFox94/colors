@@ -2,16 +2,16 @@
 
 UC_Label::UC_Label(string text, sf::Color color, int size, int x, int y)
 {
-	_s = new sf::String();
-	_s->SetColor(color);
+	_s = new sf::Text();
+	_s->setFillColor(color);
 
 	_font = new sf::Font();
-	_font->LoadFromFile("res/fonts/kaliberr.ttf", size);
+	_font->loadFromFile("res/fonts/kaliberr.ttf");
 
-	_s->SetFont(*_font);
-	_s->SetPosition(x, y);
-	_s->SetSize(size);
-	_s->SetText(text);
+	_s->setFont(*_font);
+	_s->setPosition(x, y);
+	_s->setCharacterSize(size);
+	_s->setString(text);
 
 	XPos = x;
 	YPos = y;
@@ -34,16 +34,16 @@ void UC_Label::Draw(sf::RenderTarget *window)
         posY += Parent->YPos + Parent->Offset;
     }
 
-	_s->SetPosition(posX, posY);
-	window->Draw(*_s);
+	_s->setPosition(posX, posY);
+	window->draw(*_s);
 }
 
 void UC_Label::SetText(string text)
 {
-    _s->SetText(text);
+    _s->setString(text);
 }
 
 void UC_Label::SetColor(sf::Color color)
 {
-    _s->SetColor(color);
+    _s->setFillColor(color);
 }

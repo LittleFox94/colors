@@ -13,6 +13,7 @@ class UC_Line : public UserControl
 		void Draw(sf::RenderTarget *);
 	protected:
 	private:
+        sf::RectangleShape _shape;
 };
 
 #endif // UC_LINE_H

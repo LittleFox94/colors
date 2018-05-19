@@ -8,8 +8,6 @@
 #include "uc_combobox.h"
 #include "uc_label.h"
 #include "uc_line.h"
-#include "uc_lineedit.h"
-#include "uc_progressbar.h"
 #include "uc_window.h"
 
 struct GUI_ITEM

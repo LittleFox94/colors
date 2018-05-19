@@ -22,6 +22,9 @@ class UC_Window : public UserControl
 	protected:
 	private:
 		GUI *_gui;
+
+        sf::RectangleShape *_titleBar;
+        sf::RectangleShape *_contentArea;
 };
 
 #endif // UC_WINDOW_H

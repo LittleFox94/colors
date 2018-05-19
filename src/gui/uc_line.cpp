@@ -15,6 +15,10 @@ UC_Line::UC_Line(int x, int y, int l, bool vertical)
 		Width = 1;
 		Height = l;
 	}
+
+    _shape.setSize(sf::Vector2f(Width, Height));
+    _shape.setPosition(XPos, YPos);
+    _shape.setFillColor(sf::Color(0, 0, 0));
 }
 
 UC_Line::~UC_Line()
@@ -33,5 +37,5 @@ void UC_Line::Draw(sf::RenderTarget *window)
         posY += Parent->YPos + Parent->Offset;
     }
 
-	window->Draw(sf::Shape::Line(posX, posY, posX + Width, posY + Height, 1, sf::Color(0, 0, 0)));
+	window->draw(_shape);
 }

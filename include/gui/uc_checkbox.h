@@ -20,9 +20,10 @@ class UC_CheckBox : public UserControl
 	protected:
 	private:
 		string _caption;
-		sf::Image *_img;
+		sf::Font *_font;
+		sf::Texture *_img;
 		sf::Sprite *_sprite;
-		sf::String *_label;
+		sf::Text *_label;
 };
 
 #endif // UC_CHECKBOX_H

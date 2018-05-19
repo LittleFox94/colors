@@ -3,34 +3,38 @@
 
 UC_Button::UC_Button()
 {
-	_buttonImg = new sf::Image();
-	_buttonImg->LoadFromFile("res/img/gui/button_klein.png");
+	_buttonImg = new sf::Texture();
+	_buttonImg->loadFromFile("res/img/gui/button_klein.png");
 
 	_buttonSprite = new sf::Sprite();
-	_buttonSprite->SetImage(*_buttonImg);
-	_buttonSprite->SetPosition(XPos, YPos);
-	_buttonSprite->SetSubRect(sf::IntRect(0, 0, _buttonImg->GetWidth(), _buttonImg->GetHeight() / 3));
+	_buttonSprite->setTexture(*_buttonImg);
+	_buttonSprite->setPosition(XPos, YPos);
+	_buttonSprite->setTextureRect(sf::IntRect(0, 0, _buttonImg->getSize().x, _buttonImg->getSize().y / 3));
 	callback = null;
 
-	Width = _buttonImg->GetWidth();
-	Height = _buttonImg->GetHeight() / 3;
+	Width = _buttonImg->getSize().x;
+	Height = _buttonImg->getSize().y / 3;
 }
 
 UC_Button::UC_Button(sf::Color color, int posX, int posY, void *cb)
 {
     _label = null;
 
-    _buttonImg = new sf::Image(50, 150, color);
-    _buttonImg->SetSmooth(false);
+    _buttonImg = new sf::Texture();
+    _buttonImg->create(50, 150);
+    _buttonImg->setSmooth(false);
 
 	sf::Image hoverImage;
-	hoverImage.LoadFromFile("res/img/gui/colorButton.png");
+	hoverImage.loadFromFile("res/img/gui/colorButton.png");
+
+    sf::Image tmpImage;
+    tmpImage.create(hoverImage.getSize().x, hoverImage.getSize().y, color);
 
 	for(int y = 0; y < 150; y++)
 	{
 	    for(int x = 0; x  < 50; x++)
 	    {
-	        sf::Color imgColor = hoverImage.GetPixel(x, y);
+	        sf::Color imgColor = hoverImage.getPixel(x, y);
 
 	        if(imgColor.a != 255)
 	        {
@@ -45,14 +49,16 @@ UC_Button::UC_Button(sf::Color color, int posX, int posY, void *cb)
                 imgColor.a = 255;
 	        }
 
-	        _buttonImg->SetPixel(x, y, imgColor);
+	        tmpImage.setPixel(x, y, imgColor);
 	    }
 	}
 
+    _buttonImg->update(tmpImage.getPixelsPtr());
+
 	_buttonSprite = new sf::Sprite();
-	_buttonSprite->SetImage(*_buttonImg);
-	_buttonSprite->SetPosition(XPos, YPos);
-	_buttonSprite->SetSubRect(sf::IntRect(0, 0, _buttonImg->GetWidth(), _buttonImg->GetHeight() / 3));
+	_buttonSprite->setTexture(*_buttonImg);
+	_buttonSprite->setPosition(XPos, YPos);
+	_buttonSprite->setTextureRect(sf::IntRect(0, 0, _buttonImg->getSize().x, _buttonImg->getSize().y / 3));
 	callback = null;
 
     XPos = posX;
@@ -65,36 +71,36 @@ UC_Button::UC_Button(sf::Color color, int posX, int posY, void *cb)
 
 UC_Button::UC_Button(string imgFileName, int posX, int posY, void *cb)
 {
-	_buttonImg = new sf::Image();
-	_buttonImg->LoadFromFile(imgFileName);
+	_buttonImg = new sf::Texture();
+	_buttonImg->loadFromFile(imgFileName);
 
 	_buttonSprite = new sf::Sprite();
-	_buttonSprite->SetImage(*_buttonImg);
-	_buttonSprite->SetPosition(XPos, YPos);
-	_buttonSprite->SetSubRect(sf::IntRect(0, 0, _buttonImg->GetWidth(), _buttonImg->GetHeight() / 3));
+	_buttonSprite->setTexture(*_buttonImg);
+	_buttonSprite->setPosition(XPos, YPos);
+	_buttonSprite->setTextureRect(sf::IntRect(0, 0, _buttonImg->getSize().x, _buttonImg->getSize().y / 3));
 
 	XPos = posX;
 	YPos = posY;
-	Width = _buttonImg->GetWidth();
-	Height = _buttonImg->GetHeight() / 3;
+	Width = _buttonImg->getSize().x;
+	Height = _buttonImg->getSize().y / 3;
 
 	callback = cb;
 }
 
 UC_Button::UC_Button(string imgFileName, string caption, int posX, int posY, void *cb)
 {
-	_buttonImg = new sf::Image();
-	_buttonImg->LoadFromFile(imgFileName);
+	_buttonImg = new sf::Texture();
+	_buttonImg->loadFromFile(imgFileName);
 
 	_buttonSprite = new sf::Sprite();
-	_buttonSprite->SetImage(*_buttonImg);
-	_buttonSprite->SetPosition(XPos, YPos);
-	_buttonSprite->SetSubRect(sf::IntRect(0, 0, _buttonImg->GetWidth(), _buttonImg->GetHeight() / 3));
+	_buttonSprite->setTexture(*_buttonImg);
+	_buttonSprite->setPosition(XPos, YPos);
+	_buttonSprite->setTextureRect(sf::IntRect(0, 0, _buttonImg->getSize().x, _buttonImg->getSize().y / 3));
 
 	XPos = posX;
 	YPos = posY;
-	Width = _buttonImg->GetWidth();
-	Height = _buttonImg->GetHeight() / 3;
+	Width = _buttonImg->getSize().x;
+	Height = _buttonImg->getSize().y / 3;
 
 	callback = cb;
 
@@ -103,18 +109,18 @@ UC_Button::UC_Button(string imgFileName, string caption, int posX, int posY, voi
 
 UC_Button::UC_Button(string imgFileName, int posX, int posY, void *cb, void *param)
 {
-	_buttonImg = new sf::Image();
-	_buttonImg->LoadFromFile(imgFileName);
+	_buttonImg = new sf::Texture();
+	_buttonImg->loadFromFile(imgFileName);
 
 	_buttonSprite = new sf::Sprite();
-	_buttonSprite->SetImage(*_buttonImg);
-	_buttonSprite->SetPosition(XPos, YPos);
-	_buttonSprite->SetSubRect(sf::IntRect(0, 0, _buttonImg->GetWidth(), _buttonImg->GetHeight() / 3));
+	_buttonSprite->setTexture(*_buttonImg);
+	_buttonSprite->setPosition(XPos, YPos);
+	_buttonSprite->setTextureRect(sf::IntRect(0, 0, _buttonImg->getSize().x, _buttonImg->getSize().y / 3));
 
 	XPos = posX;
 	YPos = posY;
-	Width = _buttonImg->GetWidth();
-	Height = _buttonImg->GetHeight() / 3;
+	Width = _buttonImg->getSize().x;
+	Height = _buttonImg->getSize().y / 3;
 
 	callback = cb;
 	callbackParam = param;
@@ -122,18 +128,18 @@ UC_Button::UC_Button(string imgFileName, int posX, int posY, void *cb, void *par
 
 UC_Button::UC_Button(string imgFileName, string caption, int posX, int posY, void *cb, void *param)
 {
-	_buttonImg = new sf::Image();
-	_buttonImg->LoadFromFile(imgFileName);
+	_buttonImg = new sf::Texture();
+	_buttonImg->loadFromFile(imgFileName);
 
 	_buttonSprite = new sf::Sprite();
-	_buttonSprite->SetImage(*_buttonImg);
-	_buttonSprite->SetPosition(XPos, YPos);
-	_buttonSprite->SetSubRect(sf::IntRect(0, 0, _buttonImg->GetWidth(), _buttonImg->GetHeight() / 3));
+	_buttonSprite->setTexture(*_buttonImg);
+	_buttonSprite->setPosition(XPos, YPos);
+	_buttonSprite->setTextureRect(sf::IntRect(0, 0, _buttonImg->getSize().x, _buttonImg->getSize().y / 3));
 
 	XPos = posX;
 	YPos = posY;
-	Width = _buttonImg->GetWidth();
-	Height = _buttonImg->GetHeight() / 3;
+	Width = _buttonImg->getSize().x;
+	Height = _buttonImg->getSize().y / 3;
 
 	callback = cb;
 	callbackParam = param;
@@ -159,8 +165,8 @@ void UC_Button::Draw(sf::RenderTarget *window)
         posY += Parent->YPos + Parent->Offset;
     }
 
-	_buttonSprite->SetPosition(posX, posY);
-	window->Draw(*_buttonSprite);
+	_buttonSprite->setPosition(posX, posY);
+	window->draw(*_buttonSprite);
 
     if(_label != null)
     {
@@ -171,22 +177,22 @@ void UC_Button::Draw(sf::RenderTarget *window)
 
 void UC_Button::OnHover(int, int, GUI*)
 {
-	_buttonSprite->SetSubRect(sf::IntRect(0, _buttonImg->GetHeight() / 3, _buttonImg->GetWidth(), (_buttonImg->GetHeight() / 3) * 2));
+	_buttonSprite->setTextureRect(sf::IntRect(0, _buttonImg->getSize().y / 3, _buttonImg->getSize().x, _buttonImg->getSize().y / 3));
 }
 
 void UC_Button::OnUnhover(int, int, GUI*)
 {
-	_buttonSprite->SetSubRect(sf::IntRect(0, 0, _buttonImg->GetWidth(), _buttonImg->GetHeight() / 3));
+	_buttonSprite->setTextureRect(sf::IntRect(0, 0, _buttonImg->getSize().x, _buttonImg->getSize().y / 3));
 }
 
 void UC_Button::OnClick(int, int, GUI*)
 {
-	_buttonSprite->SetSubRect(sf::IntRect(0, (_buttonImg->GetHeight() / 3) * 2, _buttonImg->GetWidth(), (_buttonImg->GetHeight() / 3) * 3));
+	_buttonSprite->setTextureRect(sf::IntRect(0, (_buttonImg->getSize().y / 3) * 2, _buttonImg->getSize().x, _buttonImg->getSize().y / 3));
 }
 
 void UC_Button::OnUnclick(int, int, GUI* gui)
 {
-	_buttonSprite->SetSubRect(sf::IntRect(0, _buttonImg->GetHeight() / 3, _buttonImg->GetWidth(), (_buttonImg->GetHeight() / 3) * 2));
+	_buttonSprite->setTextureRect(sf::IntRect(0, _buttonImg->getSize().y / 3, _buttonImg->getSize().x, _buttonImg->getSize().y / 3));
 	if(callback != null)
 	{
 		if(callbackParam != null && secondCallbackParam == null)

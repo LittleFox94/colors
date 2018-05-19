@@ -41,8 +41,6 @@ class MainMenu
         static NewGameForm *_newGameWindow;
 
         static GameLogic *_logic;
-
-        static sf::String *_fps;
 };
 
 #endif // MAINMENU_H_INCLUDED

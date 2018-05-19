@@ -15,7 +15,7 @@ class UC_Label : public UserControl
 		void SetColor(sf::Color color);
 	protected:
 	private:
-		sf::String *_s;
+		sf::Text *_s;
 		sf::Font *_font;
 };
 

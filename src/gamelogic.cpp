@@ -1,5 +1,7 @@
 #include "../include/gamelogic.h"
 
+#include <random>
+
 GameLogic::GameLogic(int numPlayers, int width, int height, int numColors, bool allowRegions, bool diagonalFill, bool ai)
 {
     _currentPlayer = 0;
@@ -26,19 +28,21 @@ GameLogic::GameLogic(int numPlayers, int width, int height, int numColors, bool 
     _pictureBuffer = new unsigned char[height * width * 4];
     memset(_pictureBuffer, 255, height * width * 4);
 
-    sf::Randomizer random;
+
+    std::default_random_engine rand;
+    std::uniform_int_distribution<int> uniform_dist(0, numColors - 1);
 
     for(int y = 0; y < height; y++)
     {
         for(int x = 0; x < width; x++)
         {
-            int value = random.Random(0, numColors - 1);
+            int value = uniform_dist(rand);
 
             if(!allowRegions)
             {
                 while(GetColor(x - 1, y, _field) == value || GetColor(x, y - 1, _field) == value)
                 {
-                    value = random.Random(0, numColors - 1);
+                    value = uniform_dist(rand);
                 }
             }
 
@@ -48,29 +52,31 @@ GameLogic::GameLogic(int numPlayers, int width, int height, int numColors, bool 
 
     while(GetColor(0, 0, _field) == GetColor(width - 1, height - 1, _field))
     {
-        int value = random.Random(0, numColors - 1);
+        int value = uniform_dist(rand);
 
         if(!allowRegions)
         {
             while(GetColor(width - 2, height - 1, _field) == value || GetColor(width - 1, height - 2, _field) == value)
             {
-                value = random.Random(0, numColors - 1);
+                value = uniform_dist(rand);
             }
         }
 
         SetColor(width - 1, height - 1, value, _field);
     }
 
-    _image = new sf::Image(width, height, _pictureBuffer);
-    _image->SetSmooth(false);
+    _image = new sf::Texture();
+    _image->create(width, height);
+    _image->update(_pictureBuffer);
+    _image->setSmooth(false);
+
     _sprite = new sf::Sprite();
-    _sprite->SetImage(*_image);
+    _sprite->setTexture(*_image);
+    _sprite->setScale(10, 10);
 
     int offsetX = (550 / _width) / 2;
     int offsetY = (550 / _height) / 2;
 
-    _sprite->Resize(550, 550);
-    _sprite->SetPosition(125 - offsetX, 0 - offsetY);
 
     int buttonPosition = (800 - (numColors * 50)) / 2;
     _gui = new GUI();
@@ -170,8 +176,13 @@ void GameLogic::SetColor(int x, int y, char color, char **field)
 
 void GameLogic::Render(sf::RenderWindow *window)
 {
-    _image->LoadFromPixels(_width, _height, _pictureBuffer);
-    window->Draw(*_sprite);
+    _image->update(_pictureBuffer);
+
+    int xPos = _image->getSize().x / 2 * 10;
+    int yPos = _image->getSize().y / 2 * 10;
+
+    _sprite->setPosition(window->getSize().x / 2 - xPos, window->getSize().y / 2 - yPos);
+    window->draw(*_sprite);
 
     _panelBackground->Draw(window, 0, 550);
 
@@ -355,7 +366,7 @@ void GameLogic::DoAI()
     int x, y;
     GetPlayerPosition(_currentPlayer, &x, &y);
 
-    for(char color = 0; color < _numColors; color++)
+    for(char color = (std::rand() / RAND_MAX); color < _numColors - (std::rand() / RAND_MAX); color++)
     {
         if(!ColorUsable(color))
         {

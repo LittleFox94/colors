@@ -9,22 +9,25 @@ UC_CheckBox::UC_CheckBox(string label, int x, int y)
 
 	_caption = label;
 
-	_img = new sf::Image();
-	_img->LoadFromFile("res/img/gui/checkbox.png");
-	_img->SetSmooth(true);
+	_img = new sf::Texture();
+	_img->loadFromFile("res/img/gui/checkbox.png");
+	_img->setSmooth(true);
 
 	_sprite = new sf::Sprite();
-	_sprite->SetImage(*_img);
-	_sprite->SetSubRect(sf::IntRect(0, 0, 15, 15));
+	_sprite->setTexture(*_img);
+	_sprite->setTextureRect(sf::IntRect(0, 0, 15, 15));
 
-	_label = new sf::String();
-	_label->SetFont(sf::Font::GetDefaultFont());
-	_label->SetSize(12);
-	_label->SetBlendMode(sf::Blend::Alpha);
-	_label->SetColor(sf::Color(0, 0, 0));
-	_label->SetText(_caption);
 
-	Width = 15 + _label->GetRect().GetWidth() + 2;
+	_font = new sf::Font();
+	_font->loadFromFile("res/fonts/kaliberr.ttf");
+
+	_label = new sf::Text();
+	_label->setFont(*_font);
+	_label->setCharacterSize(12);
+	_label->setFillColor(sf::Color(0, 0, 0));
+	_label->setString(_caption);
+
+	Width = 15 + _label->getLocalBounds().width + 2;
 
 	Checked = false;
 }
@@ -47,35 +50,35 @@ void UC_CheckBox::Draw(sf::RenderTarget *window)
         posY += Parent->YPos + Parent->Offset;
     }
 
-	_sprite->SetPosition(posX, posY);
-	_label->SetPosition(posX + 17, posY);
+	_sprite->setPosition(posX, posY);
+	_label->setPosition(posX + 17, posY);
 
-	window->Draw(*_sprite);
-	window->Draw(*_label);
+	window->draw(*_sprite);
+	window->draw(*_label);
 }
 
 void UC_CheckBox::OnHover(int, int, GUI*)
 {
 	if(Checked)
-		_sprite->SetSubRect(sf::IntRect(0, 60, 15, 75));
+		_sprite->setTextureRect(sf::IntRect(0, 60, 15, 15));
 	else
-		_sprite->SetSubRect(sf::IntRect(0, 15, 15, 30));
+		_sprite->setTextureRect(sf::IntRect(0, 15, 15, 15));
 }
 
 void UC_CheckBox::OnUnhover(int, int, GUI*)
 {
 	if(Checked)
-		_sprite->SetSubRect(sf::IntRect(0, 45, 15, 60));
+		_sprite->setTextureRect(sf::IntRect(0, 45, 15, 15));
 	else
-		_sprite->SetSubRect(sf::IntRect(0, 0, 15, 15));
+		_sprite->setTextureRect(sf::IntRect(0, 0, 15, 15));
 }
 
 void UC_CheckBox::OnClick(int, int, GUI*)
 {
 	if(Checked)
-		_sprite->SetSubRect(sf::IntRect(0, 75, 15, 90));
+		_sprite->setTextureRect(sf::IntRect(0, 75, 15, 15));
 	else
-		_sprite->SetSubRect(sf::IntRect(0, 30, 15, 45));
+		_sprite->setTextureRect(sf::IntRect(0, 30, 15, 15));
 }
 
 void UC_CheckBox::OnUnclick(int, int, GUI*)
@@ -83,7 +86,7 @@ void UC_CheckBox::OnUnclick(int, int, GUI*)
 	Checked = !Checked;
 
 	if(Checked)
-		_sprite->SetSubRect(sf::IntRect(0, 45, 15, 60));
+		_sprite->setTextureRect(sf::IntRect(0, 45, 15, 15));
 	else
-		_sprite->SetSubRect(sf::IntRect(0, 0, 15, 15));
+		_sprite->setTextureRect(sf::IntRect(0, 0, 15, 15));
 }

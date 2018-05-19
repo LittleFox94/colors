@@ -26,7 +26,7 @@ class UC_Button : public UserControl
 		void OnUnclick(int, int, GUI*);
 	protected:
 	private:
-		sf::Image *_buttonImg;
+		sf::Texture *_buttonImg;
 		sf::Sprite *_buttonSprite;
 		UC_Label *_label;
 };
